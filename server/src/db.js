@@ -31,6 +31,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Driver, Team } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+/* Driver.hasMany(Team);
+Team.hasMany(Driver); */
+
 Driver.belongsToMany(Team, {through: "driver_team"});
 Team.belongsToMany(Driver, {through: "driver_team"});
 
