@@ -1,4 +1,5 @@
-const {createDriverDB, getAllDrivers, getDriverById, getDriverByName} = require("../controllers/driversControllers")
+const {getDriversDb,createDriverDB, getAllDrivers, getDriverById, getDriverByName} = require("../controllers/driversControllers")
+const {getAllTeams} = require("../controllers/teamsControllers")
 
 const getDriverHandler = async (req, res)=>{
     const {name} = req.query;
@@ -41,13 +42,30 @@ const getDetailHandler = async (req, res)=>{
 const createDriverHandler = async (req,res)=> {
     const {name, teams,description,image,nationality,dob} = req.body;
 
+
     try {
+        const driversDb = await getAllTeams();
+
+        if(driversDb.includes(teams)){
+            console.log("HAY UN TEAM ##############", teams);
+        }
+        
         const response = await createDriverDB(name,teams,description,image,nationality,dob)
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 };
+/* 
+    *Si la bdd esta vacia llamo a  getAllTeams dentro de una constante y con await.
+    * Si el teams que me envian por body esta dentro de la lista que obtuve continuo con la creación del driver
+    sino lanzo un  error 
+    
+
+Obtiene un arreglo con todos los teams existentes de la API.
+En una primera instancia, cuando la base de datos este vacía, deberás guardar todos los teams que encuentres en la API.
+Estos deben ser obtenidos de la API (se evaluará que no haya hardcodeo). Luego de obtenerlos de la API, deben ser guardados en la base de datos para su posterior consumo desde allí.
+ */
 
 
 /* 

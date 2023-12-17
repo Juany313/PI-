@@ -4,7 +4,14 @@ const {infoCleaner} = require("../utils/index");
 const axios = require("axios");
 
 
+const getDriversDb = async () => {
 
+    const driversDB = await Driver.findAll();
+
+    
+
+    return [...driversDB];
+}
 const createDriverDB = async (name,teams,description,image,nationality,dob) =>{
     const newDriver = await Driver.create({name,teams,description,image,nationality,dob})
    
@@ -12,6 +19,8 @@ const createDriverDB = async (name,teams,description,image,nationality,dob) =>{
 };
 
 const getAllDrivers = async () => {
+
+    const teamsDB = await Driver.findAll();
 
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
     const driversApi = infoCleaner(infoApi);
@@ -58,6 +67,7 @@ console.log("ACAINFO API", driversApi);
 
 
 module.exports = {
+    getDriversDb,
     createDriverDB,
     getAllDrivers,
     getDriverById,
