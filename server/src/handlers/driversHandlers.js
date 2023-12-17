@@ -1,16 +1,25 @@
-const {createDriverDB, getAllDrivers} = require("../controllers/driversControllers")
+const {createDriverDB, getAllDrivers, getDriverById, getDriverByName} = require("../controllers/driversControllers")
 
 const getDriverHandler = async (req, res)=>{
     const {name} = req.query;
 
+    try {
+        
+        if(name){
+            const userByName = await getDriverByName(name);
+            res.status(200).json(userByName);
+        } else {
+            const response = await getAllDrivers();
+            res.status(200).json(response);
+        }
+
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
     
-    const response = await getAllDrivers();
-    res.status(200).json(response);
-    
-   
 };
 
-const getDetailHandler = (req, res)=>{
+const getDetailHandler = async (req, res)=>{
     const{id} = req.params;
     const source = isNaN(id)? "bbd" : "api";
     // hhjl4k5-45kj-45kkk ---> NaN ---> source="bbd"
@@ -19,16 +28,21 @@ const getDetailHandler = (req, res)=>{
     console.log(source);
 
     
-        res.status(200).send("Detalle de driver")
+    try {
+        const response = await getDriverById(id,source)
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
     
    
 };
 
 const createDriverHandler = async (req,res)=> {
-    const {name, teams} = req.body;
+    const {name, teams,description,image,nationality,dob} = req.body;
 
     try {
-        const response = await createDriverDB(name,teams)
+        const response = await createDriverDB(name,teams,description,image,nationality,dob)
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({error: error.message})

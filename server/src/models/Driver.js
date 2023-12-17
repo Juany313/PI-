@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
           type: DataTypes.STRING,
           allowNull: false,
       },
-      /* description: {
+      description: {
           type: DataTypes.STRING,
           allowNull: false,
       },
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       dob: {
           type: DataTypes.DATE,
           allowNull: false,
-      }, */
+      },
       teams: {
         type: DataTypes.STRING,
         allowNull: false,
