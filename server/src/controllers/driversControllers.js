@@ -20,12 +20,16 @@ const createDriverDB = async (name,teams,description,image,nationality,dob) =>{
 
 const getAllDrivers = async () => {
 
-    const teamsDB = await Driver.findAll();
+    const driversDB = await Driver.findAll();
 
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
     const driversApi = infoCleaner(infoApi);
 
-    return [...driversDB, ...driversApi];
+    const allDrivers = [...driversDB, ...driversApi];
+
+    const arrayRecortado = allDrivers.slice(0, 7);
+
+    return arrayRecortado;
 }
 
 const getDriverById = async (id,source) =>{
@@ -54,14 +58,17 @@ const getDriverByName = async (name) => {
      const infoApi = (await axios.get(`http://localhost:5000/drivers?name.forename=${name}`)).data;
     const driversApi = infoCleaner(infoApi);
 console.log("ACAINFO API", driversApi);
+
+//!falta ver como traer los de la api y como hacer para tener a todos juntos
+/*
     const driverFiltered = driversApi.filter(driver=> driver.name===name)
     console.log("ACA DRIVER FILTEREDDDDD", driverFiltered);
-/*
     const driverDB = await Driver.findAll({where: {name:name}});
 
     let suma = [...driverFiltered, ...driverDB]
 
     return suma; */
+    return driversApi;
 
 }
 

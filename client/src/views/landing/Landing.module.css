@@ -1,0 +1,10 @@
+/* styles para la landing page en Landing.module.css */
+.container {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url("https://wallpapers.com/images/featured/universe-qs811igzbabl1m0o.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
