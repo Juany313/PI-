@@ -46,11 +46,8 @@ const createDriverHandler = async (req,res)=> {
     try {
         const driversDb = await getAllTeams();
 
-        if(driversDb.includes(teams)){
-            console.log("HAY UN TEAM ##############", teams);
-        }
-        
         const response = await createDriverDB(name,teams,description,image,nationality,dob)
+        
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({error: error.message})

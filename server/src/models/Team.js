@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Team', {
       id: {
-        type: DataTypes.UUID, // hhjl4k5-45kj-45kkk   es un id de este tipo
-        primaryKey:true,
-        defaultValue:DataTypes.UUIDV4
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
       name: {
           type: DataTypes.STRING,

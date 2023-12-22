@@ -12,11 +12,20 @@ const getDriversDb = async () => {
 
     return [...driversDB];
 }
-const createDriverDB = async (name,teams,description,image,nationality,dob) =>{
-    const newDriver = await Driver.create({name,teams,description,image,nationality,dob})
-   
-    return newDriver;
+
+const createDriverDB = async (name, teams, description, image, nationality, dob) => {
+
+//! mirar en orm II 43 min 
+
+    
+        // Crear el conductor en la base de datos
+        const newDriver = await Driver.create({ name, description, image, nationality, dob });
+
+        newDriver.addTeams(teams);
+        return newDriver;
 };
+
+  
 
 const getAllDrivers = async () => {
 

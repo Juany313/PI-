@@ -28,10 +28,6 @@ module.exports = (sequelize) => {
           type: DataTypes.DATE,
           allowNull: false,
       },
-      teams: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
 
       created: {
           type: DataTypes.BOOLEAN,
