@@ -22,7 +22,8 @@ const getAllTeams = async () => {
     // Utiliza un Set para eliminar duplicados y luego convierte de nuevo a un arreglo
     let teamsSinRepetir = [...new Set(todasLasPalabras)];
         
-
+    //En una primera instancia, cuando la base de datos este vacía, 
+    //deberás guardar todos los teams que encuentres en la API.
         if (teamsDB.length !== 0) {
             return teamsSinRepetir;
         };
@@ -41,7 +42,7 @@ const getAllTeams = async () => {
             });
         }
         
-        // Llama a la función para comenzar el proceso
+        // Llamo a la función para comenzar el proceso
         agregarEquiposEnBaseDeDatos();
         
 
@@ -51,23 +52,3 @@ const getAllTeams = async () => {
 module.exports={
     getAllTeams
 }
-
-/* 
-let palabras = [
-  'McLaren, Mercedes',
-  'Prost, Sauber, Jordan,Williams,BMW Sauber,Renault',
-  'Williams, Mercedes',
-  'Minardi, Renault, McLaren, Ferrari, Alpine',
-  'Renault, McLaren, Lotus, Caterham, Lotus',
-  'Williams',
-];
-
-// Combina todas las palabras en un solo string y divide por comas
-let todasLasPalabras = palabras.join(',').split(',');
-
-// Utiliza un Set para eliminar duplicados y luego convierte de nuevo a un arreglo
-let palabrasSinRepetir = [...new Set(todasLasPalabras)];
-
-console.log(palabrasSinRepetir);
-
-*/

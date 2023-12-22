@@ -53,22 +53,31 @@ const getDriverById = async (id,source) =>{
 };
 
 const getDriverByName = async (name) => {
+    let nombreEnMinusculas = name.toLowerCase();
 
-    console.log("ACA NAMEEEE", name);
-     const infoApi = (await axios.get(`http://localhost:5000/drivers?name.forename=${name}`)).data;
+    // Cambiar la primera letra a mayúscula
+    let nombreConPrimeraLetraMayuscula = nombreEnMinusculas.charAt(0).toUpperCase() + nombreEnMinusculas.slice(1);
+    //console.log("ACA NAMEEEE", nombreConPrimeraLetraMayuscula);
+    
+
+    const infoApi = (await axios.get(`http://localhost:5000/drivers?name.forename=${nombreConPrimeraLetraMayuscula}`)).data;
     const driversApi = infoCleaner(infoApi);
-console.log("ACAINFO API", driversApi);
+    //console.log("ACAINFO API", driversApi);
+    
+    
+    const driverDB = await Driver.findAll({where: {name:nombreConPrimeraLetraMayuscula}});
+    
+    //console.log("ACAINFO DB", driverDB);
 
-//!falta ver como traer los de la api y como hacer para tener a todos juntos
-/*
-    const driverFiltered = driversApi.filter(driver=> driver.name===name)
-    console.log("ACA DRIVER FILTEREDDDDD", driverFiltered);
-    const driverDB = await Driver.findAll({where: {name:name}});
+    let suma = [...driverDB, ...driversApi]
 
-    let suma = [...driverFiltered, ...driverDB]
+    if(suma.length === 0){
+        return "No existen Drivers con ese nombre";
+    }
 
-    return suma; */
-    return driversApi;
+    const primeros15Drivers = suma.slice(0, 15);
+
+    return primeros15Drivers;
 
 }
 

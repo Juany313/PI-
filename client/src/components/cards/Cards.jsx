@@ -16,7 +16,7 @@ function Cards({allDrivers}) {
     <div className={style.list}>
       {driverList?.map((driver)=>{
         return (
-          <Link  to={`/detail/${driver.id}`}>
+          <Link  to={`/home/${driver.id}`}>
             <Card key={driver.id} driver={driver}/>
           </Link>
         )
