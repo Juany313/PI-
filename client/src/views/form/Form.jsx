@@ -10,42 +10,121 @@ import {getTeams} from "../../redux/actions"
 /* components */
 import ListaTeams from "../../components/listaTeams/ListaTeams"
  
-function Form() {
-  const dispatch = useDispatch();
-  /* Estado global */
-  const allTeams = useSelector((state)=> state.allTeams);
+  function Form() {
+      //const dispatch = useDispatch();
+      /* Estado global */
+    /*  const allTeams = useSelector((state)=> state.allTeams);
 
+      useEffect(()=>{
+        dispatch(getTeams());
+      }, [dispatch]);
 
+      
 
-//! ver como hacer que se borren los datos del formulario cuando se envian
+      const handleOpcionesSeleccionadasChange = (nuevasOpcionesSeleccionadas) => {
+        // Maneja las opciones seleccionadas como sea necesario en el componente padre
+        console.log("Opciones seleccionadas en el componente padre:", nuevasOpcionesSeleccionadas);
+      };
+    */
 
+      const [driverData, setDriverData] = useState({
+        name: '',
+        description:'',
+        nationality:'',
+        dob:''
+        
+      });
+      const [errors, setErrors] = useState({
+        name: '',
+        description:'',
+        nationality:'',
+        dob:''
+      });
 
-  useEffect(()=>{
-    dispatch(getTeams());
-  }, [dispatch]);
+      const validate = (driverData)=>{
+        
+        let errors = {};
+    /* Sabri recomienda hacer un if elseif si es necesario por cada campo */
+        if (!driverData.name) {
+          errors.name = 'El nombre del driver no puede estar vacío.';
+        }
+        return errors;
+      }
+        const handleChange= (event)=>{
+          const property = event.target.name;
+          const value = event.target.value;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  
-  };
+          setDriverData({...driverData, [property]: value});
 
-  const handleOpcionesSeleccionadasChange = (nuevasOpcionesSeleccionadas) => {
-    // Maneja las opciones seleccionadas como sea necesario en el componente padre
-    console.log("Opciones seleccionadas en el componente padre:", nuevasOpcionesSeleccionadas);
-  };
- 
-  
+          setErrors(
+            validate({
+              ...driverData,
+              [event.target.name]: event.target.value,
+            })
+          );
+        }
 
+ console.log("acadriverdataaaaaaa",driverData);
+ console.log("acaerrors",errors);
+        
+        const handleSubmit = (event) => {
+          event.preventDefault();
+
+        };
+//description  image  nationality   dob
     return (
       <>
       <form onSubmit={handleSubmit}>
-      <div>
+      <div> 
+        <label htmlFor="name">Nombre</label>
+        <input 
+          type="text" 
+          name="name" 
+          value={driverData.name} 
+          onChange={handleChange} 
+          />
+        {errors.name && <span>{errors.name}</span>}
+      </div>
+
+      <div> 
+        <label htmlFor="description">Descripción</label>
+        <input 
+          type="text" 
+          name="description" 
+          value={driverData.description} 
+          onChange={handleChange} 
+          />
+        {errors.description && <span>{errors.description}</span>}
+      </div>
+
+      <div> 
+        <label htmlFor="nationality">Nacionalidad</label>
+        <input 
+          type="text" 
+          name="nationality" 
+          value={driverData.nationality} 
+          onChange={handleChange} 
+          />
+        {errors.nationality && <span>{errors.nationality}</span>}
+      </div>
+      <div> 
+        <label htmlFor="dob">Fecha de Nacimiento</label>
+        <input 
+          type="date" 
+          name="dob" 
+          value={driverData.dob} 
+          onChange={handleChange} 
+          />
+        {errors.dob && <span>{errors.dob}</span>}
+      </div>
+      
+      {/* <div>
           <h1>Lista de Teams</h1>
           <ListaTeams 
           opciones={allTeams} 
           onOpcionesSeleccionadasChange={handleOpcionesSeleccionadasChange} 
            />
-        </div>
+        </div> */}
       <button type="submit">Enviar</button>
     </form>
         
