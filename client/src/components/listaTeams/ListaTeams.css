@@ -1,0 +1,12 @@
+.lista-teams-container {
+    width: 250px;
+    height: 200px;
+    overflow-y: auto; /* Agrega la barra de desplazamiento vertical */
+  }
+  
+  .lista-teams {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  

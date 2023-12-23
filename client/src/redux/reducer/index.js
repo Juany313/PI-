@@ -1,7 +1,7 @@
-import { GET_DRIVERS } from "../actions";
+import { GET_DRIVERS,GET_TEAMS } from "../actions";
 
 
-let initialState = {allDrivers:[], driversCopy: [], posts:[]}
+let initialState = {allDrivers:[], driversCopy: [], allTeams:[]}
 
 function rootReducer(state=initialState,action){
     switch (action.type) {
@@ -11,6 +11,11 @@ function rootReducer(state=initialState,action){
                 ...state,
                 allDrivers: action.payload,
                 driversCopy: action.payload,
+              };
+        case GET_TEAMS:
+            return {
+                ...state,
+                allTeams: action.payload,
               };
 
     

@@ -29,7 +29,15 @@ const createDriverDB = async (name, teams, description, image, nationality, dob)
 
 const getAllDrivers = async () => {
 
-    const driversDB = await Driver.findAll();
+    const driversDB = await Driver.findAll({
+        include: {
+            model: Team,
+            attributes: ["name"],
+            through: {
+                attributes: [],
+            },
+        }
+    });
 
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
     const driversApi = infoCleaner(infoApi);
@@ -48,12 +56,15 @@ const getDriverById = async (id,source) =>{
          driver = infoCleaner(infoDriver);
          //console.log("····##### respuestaaaaa", infoDriver);
      } else {
-         driver = (await Driver.findByPk(id/* , {
+         driver = (await Driver.findByPk(id, {
              include: {
-                 model: Post,
-                 attributes: ["title", "body"]
-             }
-         } */));
+            model: Team,
+            attributes: ["name"],
+            through: {
+                attributes: [],
+            },
+        }
+         } ));
         
      }
 
