@@ -6,8 +6,6 @@ const getAllTeams = async () => {
 
     const teamsDB = await Team.findAll();
    
-
-
     const teams = [];
     
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
@@ -15,6 +13,7 @@ const getAllTeams = async () => {
             infoApi.forEach(element => {
                 teams.push(element.teams);
             });
+
 
     // Combina todas las palabras en un solo string y divide por comas
     let todasLasPalabras = teams.join(',').split(',');
@@ -24,6 +23,8 @@ const getAllTeams = async () => {
         
     //En una primera instancia, cuando la base de datos este vacía, 
     //deberás guardar todos los teams que encuentres en la API.
+    //Si la base de datos esta vacia entra aca y retorno los teams para cortar toda la ejecución
+    //asi no los carga abajo.
         if (teamsDB.length !== 0) {
             return teamsSinRepetir;
         };

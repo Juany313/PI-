@@ -1,10 +1,12 @@
 /* style */
 import style from './Detail.module.css'; 
 
-import React from "react";
-import {useParams} from "react-router-dom";
-import axios from 'axios';
+/* hooks */
+import {Link, useParams} from "react-router-dom";
 import { useState, useEffect } from 'react';
+
+/* dependencias */
+import axios from 'axios';
 
  
 function Detail() {
@@ -25,6 +27,9 @@ function Detail() {
   
     return (
       <div className={style.container}>
+        <Link  to={`/home`}>
+        <button>HOME</button>
+        </Link>
         <p>ACA DETAIL</p>
         {character && <h2>character.nationality</h2>}
           

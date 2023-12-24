@@ -1,7 +1,8 @@
 /* style */
 import style from './Form.module.css'; 
 
-/* hoocks */
+/* hooks */
+import {Link} from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 /* actions */
@@ -74,6 +75,12 @@ import ListaTeams from "../../components/listaTeams/ListaTeams"
 //description  image  nationality   dob
     return (
       <>
+      <div>
+        <Link  to={`/home`}>
+          <button>HOME</button>
+        </Link>
+      </div>
+      
       <form onSubmit={handleSubmit}>
       <div> 
         <label htmlFor="name">Nombre</label>
@@ -125,7 +132,7 @@ import ListaTeams from "../../components/listaTeams/ListaTeams"
           onOpcionesSeleccionadasChange={handleOpcionesSeleccionadasChange} 
            />
         </div> */}
-      <button type="submit">Enviar</button>
+      <button type="submit">Crear Driver</button>
     </form>
         
   

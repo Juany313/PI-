@@ -39,10 +39,24 @@ const getAllDrivers = async () => {
         }
     });
 
+    const driversDBTeamsEnArray = driversDB.map((driver) => ({
+        ...driver.toJSON(),
+        Teams: driver.Teams.map((team) => team.name.trim()), // Extraigo solo los nombres y elimino espacios adicionales
+      }));
+
+
+
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
     const driversApi = infoCleaner(infoApi);
 
-    const allDrivers = [...driversDB, ...driversApi];
+    const driversApiWithTeamsArray = driversApi.map(({ teams, ...rest }) => ({
+        ...rest,
+        Teams: teams ? teams.split(",").map((team) => team.trim()) : [],
+      }));
+      
+      
+
+    const allDrivers = [...driversDBTeamsEnArray, ...driversApiWithTeamsArray];
 
     const arrayRecortado = allDrivers.slice(0, 7);
 
@@ -72,6 +86,7 @@ const getDriverById = async (id,source) =>{
      return driver;
 };
 
+//! corregir este
 const getDriverByName = async (name) => {
     let nombreEnMinusculas = name.toLowerCase();
 

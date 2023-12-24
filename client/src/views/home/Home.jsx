@@ -2,7 +2,7 @@
 import style from './Home.module.css'; 
 
 /* components */
-import Navbar from "../../components/navbar/Navbar"
+import Navbar from "../../components/navbar/Nav"
 import Cards from "../../components/cards/Cards"
 
 /* dependencias */
