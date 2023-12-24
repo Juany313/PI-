@@ -8,31 +8,51 @@ import {useDispatch, useSelector} from "react-redux";
 /* actions */
 import {getTeams} from "../../redux/actions"
 
-/* components */
-import ListaTeams from "../../components/listaTeams/ListaTeams"
- 
-  function Form() {
-      //const dispatch = useDispatch();
-      /* Estado global */
-    /*  const allTeams = useSelector((state)=> state.allTeams);
 
+
+  function Form() {
+
+    /* aca va lo referido a la lista de teams */
+    const [mostrarLista, setMostrarLista] = useState(false);
+    const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
+
+    const toggleMostrarLista = () => {
+      setMostrarLista(!mostrarLista);
+    };
+
+    const handleCheckboxChange = (opcion) => {
+      setOpcionesSeleccionadas((prevOpcionesSeleccionadas) => {
+        const nuevasOpcionesSeleccionadas = prevOpcionesSeleccionadas.includes(opcion)
+          ? prevOpcionesSeleccionadas.filter((opt) => opt !== opcion)
+          : [...prevOpcionesSeleccionadas, opcion];
+    
+        setDriverData((prevDriverData) => ({
+          ...prevDriverData,
+          Teams: nuevasOpcionesSeleccionadas,
+        }));
+    
+        return nuevasOpcionesSeleccionadas;
+      });
+    };
+    
+  
+
+    /* Estado global */
+    const dispatch = useDispatch();
+    const allTeams = useSelector((state)=> state.allTeams);
+      
       useEffect(()=>{
         dispatch(getTeams());
       }, [dispatch]);
-
       
-
-      const handleOpcionesSeleccionadasChange = (nuevasOpcionesSeleccionadas) => {
-        // Maneja las opciones seleccionadas como sea necesario en el componente padre
-        console.log("Opciones seleccionadas en el componente padre:", nuevasOpcionesSeleccionadas);
-      };
-    */
+   
 
       const [driverData, setDriverData] = useState({
         name: '',
         description:'',
         nationality:'',
-        dob:''
+        dob:'',
+        Teams: [], // Inicializa Teams como un array vacío
         
       });
       const [errors, setErrors] = useState({
@@ -67,6 +87,7 @@ import ListaTeams from "../../components/listaTeams/ListaTeams"
 
  console.log("acadriverdataaaaaaa",driverData);
  console.log("acaerrors",errors);
+ console.log("acateammmmmmss", opcionesSeleccionadas);
         
         const handleSubmit = (event) => {
           event.preventDefault();
@@ -125,13 +146,28 @@ import ListaTeams from "../../components/listaTeams/ListaTeams"
         {errors.dob && <span>{errors.dob}</span>}
       </div>
       
-      {/* <div>
-          <h1>Lista de Teams</h1>
-          <ListaTeams 
-          opciones={allTeams} 
-          onOpcionesSeleccionadasChange={handleOpcionesSeleccionadasChange} 
-           />
-        </div> */}
+      <div className="lista-teams-container">
+      <button onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Mostrar Lista'}</button>
+      {mostrarLista && (
+        <ul className="lista-teams">
+          {allTeams?.map((opcion) => (
+            <li key={opcion}>
+              <input
+                type="checkbox"
+                id={opcion}
+                value={opcion}
+                checked={opcionesSeleccionadas.includes(opcion)}
+                onChange={() => handleCheckboxChange(opcion)}
+              />
+              <label htmlFor={opcion} style={{ color: opcionesSeleccionadas.includes(opcion) ? 'yellow' : 'black' }}>
+                {opcion}
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
       <button type="submit">Crear Driver</button>
     </form>
         
