@@ -1,19 +1,23 @@
-import { useState } from "react";
 
-export default function SearchBar(props) {
-  const [id, setId] = useState("");
+import React, { useState } from "react";
 
-  const handleChange = (event)=>{
-    setId(event.target.value);
-  }
-  const handleAddClick = () => {
-    props.onSearch(id); // Pasa el valor de id a la función onSearch
-    setId(""); // Limpia el estado id después de pasar el valor
+export default function SearchBar({ handleChange, handleSubmit }) {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+    handleChange(e);
   };
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    handleSubmit(e); // Pasa el evento completo a handleSubmit
+  };
+
   return (
-     <div>
-         <input type='search' value={id} onChange={handleChange}/>
-        <button onClick={handleAddClick}>Buscar</button> 
-     </div>
+    <div>
+      <input type="search" value={searchValue} onChange={handleInputChange} />
+      <button onClick={handleButtonClick}>Buscar</button>
+    </div>
   );
 }
