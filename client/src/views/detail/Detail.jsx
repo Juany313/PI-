@@ -12,26 +12,23 @@ import axios from 'axios';
 function Detail() {
 
   const { id } = useParams();
-  const [character, setCharacter] = useState({});
+  const [driver, setDriver] = useState({});
 
   useEffect(() => {
     axios(`http://localhost:3001/drivers/${id}`).then(({ data }) => {
-       if (data.name) {
-          setCharacter(data);
-       } else {
-          window.alert('No hay personajes con ese ID');
-       }
+      setDriver(data);
     });
-    return setCharacter({});
+    return setDriver({});
  }, [id]);
-  
+ console.log("ACA IDDDDDDDDDDD",id);
+  console.log("este es el driver", driver);
     return (
       <div className={style.container}>
         <Link  to={`/home`}>
         <button>HOME</button>
         </Link>
         <p>ACA DETAIL</p>
-        {character && <h2>character.nationality</h2>}
+        {driver.nationality && <h2>{driver.nationality}</h2>}
           
       </div>
     )

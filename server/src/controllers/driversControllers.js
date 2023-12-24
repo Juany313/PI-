@@ -4,22 +4,13 @@ const {infoCleaner} = require("../utils/index");
 const axios = require("axios");
 
 
-const getDriversDb = async () => {
-
-    const driversDB = await Driver.findAll();
-
-    
-
-    return [...driversDB];
-}
-
-const createDriverDB = async (name, teams, description, image, nationality, dob) => {
+const createDriverDB = async (name,lastName, teams, description, image, nationality, dob) => {
 
 //! mirar en orm II 43 min 
 
     
         // Crear el conductor en la base de datos
-        const newDriver = await Driver.create({ name, description, image, nationality, dob });
+        const newDriver = await Driver.create({ name,lastName, description, image, nationality, dob });
 
         newDriver.addTeams(teams);
         return newDriver;
@@ -52,73 +43,50 @@ const getAllDrivers = async () => {
     const driversApiWithTeamsArray = driversApi.map(({ teams, ...rest }) => ({
         ...rest,
         Teams: teams ? teams.split(",").map((team) => team.trim()) : [],
+        lastName: rest.name.surname,
+        name: rest.name.forename
       }));
       
       
 
     const allDrivers = [...driversDBTeamsEnArray, ...driversApiWithTeamsArray];
 
-    const arrayRecortado = allDrivers.slice(0, 7);
 
-    return arrayRecortado;
+    return allDrivers;
 }
 
-const getDriverById = async (id,source) =>{
-    let driver;
-     if(source==="api"){
-         infoDriver = [(await axios.get(`http://localhost:5000/drivers/${id}`)).data];
-         driver = infoCleaner(infoDriver);
-         //console.log("····##### respuestaaaaa", infoDriver);
-     } else {
-         driver = (await Driver.findByPk(id, {
-             include: {
-            model: Team,
-            attributes: ["name"],
-            through: {
-                attributes: [],
-            },
-        }
-         } ));
-        
-     }
+const getDriverById = async (id) => {
+    let drivers = await getAllDrivers();
+    
+    const driver = drivers.find(drive => drive.id.toString() === id);
 
-
-     return driver;
+    return driver; 
 };
 
-//! corregir este
+
 const getDriverByName = async (name) => {
-    let nombreEnMinusculas = name.toLowerCase();
+    let drivers = await getAllDrivers();
 
-    // Cambiar la primera letra a mayúscula
-    let nombreConPrimeraLetraMayuscula = nombreEnMinusculas.charAt(0).toUpperCase() + nombreEnMinusculas.slice(1);
-    //console.log("ACA NAMEEEE", nombreConPrimeraLetraMayuscula);
-    
+    const nameLower = name.toLowerCase();
 
-    const infoApi = (await axios.get(`http://localhost:5000/drivers?name.forename=${nombreConPrimeraLetraMayuscula}`)).data;
-    const driversApi = infoCleaner(infoApi);
-    //console.log("ACAINFO API", driversApi);
-    
-    
-    const driverDB = await Driver.findAll({where: {name:nombreConPrimeraLetraMayuscula}});
-    
-    //console.log("ACAINFO DB", driverDB);
+    let coincidencias = drivers.filter(driver => {
+        return driver.name.toLowerCase() === nameLower;
+    });
 
-    let suma = [...driverDB, ...driversApi]
-
-    if(suma.length === 0){
+    if (coincidencias.length === 0) {
         return "No existen Drivers con ese nombre";
     }
 
-    const primeros15Drivers = suma.slice(0, 15);
+    const primeros15Drivers = coincidencias.slice(0, 15);
 
     return primeros15Drivers;
+};
 
-}
+
+
 
 
 module.exports = {
-    getDriversDb,
     createDriverDB,
     getAllDrivers,
     getDriverById,
