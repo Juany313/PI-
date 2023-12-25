@@ -4,14 +4,14 @@ import style from './Card.module.css';
 
 
 function Card({driver}) {
-  console.log("acadriverrrrrrrrrrr", driver);
+  //console.log("acadriverrrrrrrrrrr", driver);
   //let lastname= "";
   const {name,image,Teams}=driver;
   
 //!ENCONTRAR UNA IMAGEN ALTERNATIVA SIN DERECHOS DE AUTOR DE UN DRIVER
 
   const imageAlternativa = "https://wallpapers.com/images/featured/universe-qs811igzbabl1m0o.jpg"
-  console.log("imageeee", image);
+  //console.log("imageeee", image);
   return (
     
          
