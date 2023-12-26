@@ -6,7 +6,10 @@ import {Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 /* actions */
-import {getTeams} from "../../redux/actions"
+import {getTeams,postDriver} from "../../redux/actions"
+
+/* utils */
+import validate from "../../utils"
 
 
 
@@ -31,9 +34,41 @@ import {getTeams} from "../../redux/actions"
           Teams: nuevasOpcionesSeleccionadas,
         }));
     
+        // Validar Teams y actualizar errores
+          const newErrors = validate({
+            ...driverData,
+            Teams: nuevasOpcionesSeleccionadas,
+          });
+
+          setErrors(newErrors);
+
         return nuevasOpcionesSeleccionadas;
       });
     };
+
+    /* const handleCheckboxChange = (opcion) => {
+  setOpcionesSeleccionadas((prevOpcionesSeleccionadas) => {
+    const nuevasOpcionesSeleccionadas = prevOpcionesSeleccionadas.includes(opcion)
+      ? prevOpcionesSeleccionadas.filter((opt) => opt !== opcion)
+      : [...prevOpcionesSeleccionadas, opcion];
+
+    setDriverData((prevDriverData) => ({
+      ...prevDriverData,
+      Teams: nuevasOpcionesSeleccionadas,
+    }));
+
+    // Validar Teams y actualizar errores
+    const newErrors = validate({
+      ...driverData,
+      Teams: nuevasOpcionesSeleccionadas,
+    });
+
+    setErrors(newErrors);
+
+    return nuevasOpcionesSeleccionadas;
+  });
+};
+ */
     
   
 
@@ -49,6 +84,7 @@ import {getTeams} from "../../redux/actions"
 
       const [driverData, setDriverData] = useState({
         name: '',
+        lastName: '',
         description:'',
         nationality:'',
         dob:'',
@@ -57,43 +93,44 @@ import {getTeams} from "../../redux/actions"
       });
       const [errors, setErrors] = useState({
         name: '',
+        lastName: '',
         description:'',
         nationality:'',
-        dob:''
+        dob:'',
+        Teams: ''
       });
 
-      const validate = (driverData)=>{
-        
-        let errors = {};
-    /* Sabri recomienda hacer un if elseif si es necesario por cada campo */
-        if (!driverData.name) {
-          errors.name = 'El nombre del driver no puede estar vacío.';
-        }
-        return errors;
-      }
-        const handleChange= (event)=>{
-          const property = event.target.name;
-          const value = event.target.value;
+      const handleChange = (event) => {
+        const property = event.target.name;
+        const value = event.target.value;
+      
+        setDriverData({ ...driverData, [property]: value });
+      
+        setErrors((prevErrors) => {
+          const newErrors = validate({
+            ...driverData,
+            [property]: value,  // Usa event.target.name aquí
+          });
+      
+          // Realiza acciones adicionales si es necesario después de actualizar los errores
+      
+          return newErrors;
+        });
+      };
+      
 
-          setDriverData({...driverData, [property]: value});
-
-          setErrors(
-            validate({
-              ...driverData,
-              [event.target.name]: event.target.value,
-            })
-          );
-        }
-
- console.log("acadriverdataaaaaaa",driverData);
- console.log("acaerrors",errors);
- console.log("acateammmmmmss", opcionesSeleccionadas);
+        console.log("acateammmmmmss", opcionesSeleccionadas);
+        console.log("acaerrors",errors);
+        console.log("acadriverdataaaaaaa",driverData);
         
         const handleSubmit = (event) => {
           event.preventDefault();
-
+          dispatch(postDriver(driverData));
+          alert("CONDUCTOR CREADO CON EXITO!!")
+          // Recarga la página
+          window.location.reload();
         };
-//description  image  nationality   dob
+
     return (
       <>
       <div>
@@ -112,6 +149,16 @@ import {getTeams} from "../../redux/actions"
           onChange={handleChange} 
           />
         {errors.name && <span>{errors.name}</span>}
+      </div>
+      <div> 
+        <label htmlFor="lastName">Apellido</label>
+        <input 
+          type="text" 
+          name="lastName" 
+          value={driverData.lastName} 
+          onChange={handleChange} 
+          />
+        {errors.lastName && <span>{errors.lastName}</span>}
       </div>
 
       <div> 
@@ -147,7 +194,8 @@ import {getTeams} from "../../redux/actions"
       </div>
       
       <div className="lista-teams-container">
-      <button onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Mostrar Lista'}</button>
+      <button type="button" onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Seleccionar Teams'}</button>
+      {errors.Teams && <span>{errors.Teams}</span>}
       {mostrarLista && (
         <ul className="lista-teams">
           {allTeams?.map((opcion) => (
@@ -168,7 +216,7 @@ import {getTeams} from "../../redux/actions"
       )}
     </div>
 
-      <button type="submit">Crear Driver</button>
+      <button type="submit" disabled={Object.keys(errors).length > 0}>Crear Driver</button>
     </form>
         
   
