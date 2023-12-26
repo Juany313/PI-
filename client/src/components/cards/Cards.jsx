@@ -4,13 +4,13 @@ import Card from "../card/Card"
 
 import {Link} from "react-router-dom";
 
-function Cards({allDrivers}) {
+function Cards({driversForCards}) {
   //Cuando me llega una sola props hago el destructuring directo.
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
   
 
-  const driverList = allDrivers;
+  const driverList = driversForCards;
 
   return (
     <div className={style.list}>

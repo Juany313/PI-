@@ -46,31 +46,6 @@ import validate from "../../utils"
       });
     };
 
-    /* const handleCheckboxChange = (opcion) => {
-  setOpcionesSeleccionadas((prevOpcionesSeleccionadas) => {
-    const nuevasOpcionesSeleccionadas = prevOpcionesSeleccionadas.includes(opcion)
-      ? prevOpcionesSeleccionadas.filter((opt) => opt !== opcion)
-      : [...prevOpcionesSeleccionadas, opcion];
-
-    setDriverData((prevDriverData) => ({
-      ...prevDriverData,
-      Teams: nuevasOpcionesSeleccionadas,
-    }));
-
-    // Validar Teams y actualizar errores
-    const newErrors = validate({
-      ...driverData,
-      Teams: nuevasOpcionesSeleccionadas,
-    });
-
-    setErrors(newErrors);
-
-    return nuevasOpcionesSeleccionadas;
-  });
-};
- */
-    
-  
 
     /* Estado global */
     const dispatch = useDispatch();

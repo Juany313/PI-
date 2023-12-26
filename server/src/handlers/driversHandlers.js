@@ -11,7 +11,7 @@ const getDriverHandler = async (req, res)=>{
             res.status(200).json(userByName);
         } else {
             const response = await getAllDrivers();
-            const responseRecorte = response.slice(0, 10);
+            const responseRecorte = response   //.slice(0, 10);
             res.status(200).json(responseRecorte);
         }
 
