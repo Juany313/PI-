@@ -81,6 +81,24 @@ const getDriverByName = async (name) => {
 
     return primeros15Drivers;
 };
+const getDriverByTeam = async (team) => {
+    let drivers = await getAllDrivers();
+
+    const nameLower = team.toLowerCase();
+
+    let coincidencias = drivers.filter(driver => {
+        return driver.name.toLowerCase() === nameLower;
+    });
+
+    if (coincidencias.length === 0) {
+        return "No existen Drivers con ese nombre";
+    }
+
+    const primeros15Drivers = coincidencias.slice(0, 15);
+
+    return primeros15Drivers;
+};
+
 
 
 

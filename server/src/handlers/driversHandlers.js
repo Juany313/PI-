@@ -1,14 +1,17 @@
-const {createDriverDB, getAllDrivers, getDriverById, getDriverByName} = require("../controllers/driversControllers")
+const {createDriverDB, getAllDrivers, getDriverById, getDriverByName,getDriverByTeam} = require("../controllers/driversControllers")
 const {getAllTeams} = require("../controllers/teamsControllers")
 
 const getDriverHandler = async (req, res)=>{
-    const {name} = req.query;
+    const {name, team} = req.query;
 
     try {
         
         if(name){
-            const userByName = await getDriverByName(name);
-            res.status(200).json(userByName);
+            const driverByName = await getDriverByName(name);
+            res.status(200).json(driverByName);
+        } else if(team) {
+            const driverByTeam = await getDriverByTeam(team);
+            res.status(200).json(driverByTeam);
         } else {
             const response = await getAllDrivers();
             const responseRecorte = response   //.slice(0, 10);

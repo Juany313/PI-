@@ -10,7 +10,7 @@ import {useEffect,useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 /* actions */
-import {getDrivers, getDriversByName} from "../../redux/actions"
+import {getDrivers, getDriversByName,getDriversByTeam} from "../../redux/actions"
  
 
 
@@ -29,6 +29,14 @@ function Home() {
 
   function handleSubmit(){
     dispatch(getDriversByName(searchString))
+    setValorPage(() => ({
+      start: 0,
+      end: 9,
+    }));
+  }
+  function handleSubmitTeam(){
+    console.log(searchString);
+    dispatch(getDriversByTeam(searchString))
     setValorPage(() => ({
       start: 0,
       end: 9,
@@ -56,12 +64,14 @@ function Home() {
   const handleNextClick = () => {
     // Aquí puedes agregar una verificación para evitar que se excedan los límites de tu array
     // Supongamos que hay un array llamado `tuArray` y su longitud es `tuArray.length`
-    // if (valorPage.end < tuArray.length) {
+     if (valorPage.end < allDrivers.length) {
+      console.log("aca cantidad de driversssssssss",driversForCards.length);
+      console.log("aca valorprevState.end + 9",valorPage.end + 9);
     setValorPage((prevState) => ({
       start: prevState.start + 9,
       end: prevState.end + 9,
     }));
-    // }
+     }
   };
 
   const handleButtonClick = (buttonType) => {
@@ -79,6 +89,9 @@ function Home() {
     } else if (buttonType === 'fechaNacimiento') {
       // Ordenar por fecha de nacimiento
       sortedDrivers = [...allDrivers].sort((a, b) => new Date(a.dob) - new Date(b.dob));
+    } else if (buttonType === 'sinOrden') {
+      // Ordenar como cuando carga la página
+      sortedDrivers = [...allDrivers];
     }
   
     // Actualizar el estado con la lista ordenada
@@ -94,17 +107,20 @@ function Home() {
   if (!activeButton) {
     driversForCardsRecorte = allDrivers.slice(valorPage.start, valorPage.end);
   }
-  
+  //! ERRORES EN GETBYNAME YGET BY TEAMS
   return (
     <div className={style.home}>
       <p className={style.title}>Home</p>
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
-      <button type="button" onClick={handlePrevClick}>
-        Prev
-      </button>
-      <button type="button" onClick={handleNextClick}>
-        Next
-      </button>
+      
+      <h2>Filtrar:</h2>
+      <div>
+      <input type="search" value={searchString} onChange={handleChange} />
+      <button onClick={handleSubmitTeam}>Buscar</button>
+    </div>
+
+      <h2>Ordenar:</h2>
+      <div>
       <button
         type="button"
         className={activeButton === 'ascendente' ? 'active' : 'noactive'}
@@ -126,6 +142,25 @@ function Home() {
       >
         Fecha de Nacimiento
       </button>
+      <button
+        type="button"
+        className={activeButton === 'sinOrden' ? 'active' : 'noactive'}
+        onClick={() => handleButtonClick('sinOrden')}
+      >
+        Sin Orden
+      </button>
+      </div>
+      
+      <div>
+          <button type="button" onClick={handlePrevClick}>
+            Prev
+          </button>
+          <button type="button" onClick={handleNextClick}>
+            Next
+          </button>
+      </div>
+      
+
       <Cards driversForCards={driversForCardsRecorte} />
     </div>
   );

@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_DRIVERS = "GET_DRIVERS";
 export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const GET_TEAMS = "GET_TEAMS";
+export const GET_DRIVERS_BY_TEAM = "GET_DRIVERS_BY_TEAM";
+
 export const POST_DRIVER = 'POST_DRIVER';
 
 export function getDrivers(){
@@ -19,6 +21,15 @@ export function getDriversByName(name){
         const response = await axios(`http://localhost:3001/drivers?name=${name}`)
         return dispatch({
             type: GET_DRIVERS_BY_NAME,
+            payload: response.data
+        })
+    }
+}
+export function getDriversByTeam(team){
+    return async function(dispatch){
+        const response = await axios(`http://localhost:3001/drivers?team=${team}`)
+        return dispatch({
+            type: GET_DRIVERS_BY_TEAM,
             payload: response.data
         })
     }
