@@ -11,6 +11,7 @@ const getDriverHandler = async (req, res)=>{
             res.status(200).json(driverByName);
         } else if(team) {
             const driverByTeam = await getDriverByTeam(team);
+            //console.log("acaaa#########driverByTeam",driverByTeam);
             res.status(200).json(driverByTeam);
         } else {
             const response = await getAllDrivers();

@@ -84,19 +84,27 @@ const getDriverByName = async (name) => {
 const getDriverByTeam = async (team) => {
     let drivers = await getAllDrivers();
 
-    const nameLower = team.toLowerCase();
-
+    const teamLower = team.toLowerCase();
+    //console.log("primer driverrrrrrrrr", drivers[0]);
     let coincidencias = drivers.filter(driver => {
-        return driver.name.toLowerCase() === nameLower;
+        // Verifica si driver.Teams está definido y no es null
+        if (driver.Teams && Array.isArray(driver.Teams)) {
+            // Utiliza includes para buscar la coincidencia exacta
+            const tieneCoincidenciaExacta = driver.Teams
+                .map(elemento => elemento.toLowerCase())
+                .includes(teamLower);
+
+            return tieneCoincidenciaExacta;
+        }
+        return false; // No hay Teams definidos, así que no hay coincidencia
     });
 
     if (coincidencias.length === 0) {
-        return "No existen Drivers con ese nombre";
+        return "No hay coincidencias";
     }
 
-    const primeros15Drivers = coincidencias.slice(0, 15);
-
-    return primeros15Drivers;
+    
+    return coincidencias;
 };
 
 
@@ -108,7 +116,7 @@ module.exports = {
     createDriverDB,
     getAllDrivers,
     getDriverById,
-    getDriverByName
+    getDriverByName,getDriverByTeam
 }
 
 

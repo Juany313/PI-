@@ -21,6 +21,7 @@ function Home() {
   const dispatch = useDispatch();
   /* Estado global */
   const allDrivers = useSelector((state)=> state.allDrivers);
+  const driversCopy = useSelector((state)=> state.driversCopy);
   const [searchString, setSearchString] = useState("");
 
   function handleChange(e){
@@ -90,8 +91,10 @@ function Home() {
       // Ordenar por fecha de nacimiento
       sortedDrivers = [...allDrivers].sort((a, b) => new Date(a.dob) - new Date(b.dob));
     } else if (buttonType === 'sinOrden') {
+        //borro lo del campo de busqueda
+        setSearchString("");
       // Ordenar como cuando carga la página
-      sortedDrivers = [...allDrivers];
+      sortedDrivers = [...driversCopy];
     }
   
     // Actualizar el estado con la lista ordenada
@@ -107,7 +110,7 @@ function Home() {
   if (!activeButton) {
     driversForCardsRecorte = allDrivers.slice(valorPage.start, valorPage.end);
   }
-  //! ERRORES EN GETBYNAME YGET BY TEAMS
+  
   return (
     <div className={style.home}>
       <p className={style.title}>Home</p>
@@ -116,7 +119,7 @@ function Home() {
       <h2>Filtrar:</h2>
       <div>
       <input type="search" value={searchString} onChange={handleChange} />
-      <button onClick={handleSubmitTeam}>Buscar</button>
+      <button onClick={handleSubmitTeam}>Buscar Team</button>
     </div>
 
       <h2>Ordenar:</h2>
@@ -147,7 +150,7 @@ function Home() {
         className={activeButton === 'sinOrden' ? 'active' : 'noactive'}
         onClick={() => handleButtonClick('sinOrden')}
       >
-        Sin Orden
+        Reset
       </button>
       </div>
       
