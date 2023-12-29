@@ -1,7 +1,7 @@
-import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM } from "../actions";
+import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN } from "../actions";
 
 
-let initialState = {allDrivers:[], driversCopy: [], allTeams:[]}
+let initialState = {allDrivers:[], driversCopy: [], allTeams:[] }
 
 function rootReducer(state=initialState,action){
     switch (action.type) {
@@ -27,6 +27,28 @@ function rootReducer(state=initialState,action){
                 ...state,
                 allTeams: action.payload,
               };
+        case GET_DRIVERS_BY_ORIGIN:
+            console.log("action.payload.drivers",action.payload.drivers[0].created);
+            
+            switch (action.payload.origin) {
+                case "api":
+                    return {
+                        ...state,
+                        allDrivers: action.payload.drivers.filter(driver => driver.created === false),
+                      };
+                case "bdd":
+                    return {
+                        ...state,
+                        allDrivers: action.payload.drivers.filter(driver => driver.created === true),
+                      };
+                case "all":
+                    return {
+                        ...state,
+                        allDrivers: action.payload.drivers,
+                      };
+                default:
+                    return {...state};
+            }
 
     
         default:

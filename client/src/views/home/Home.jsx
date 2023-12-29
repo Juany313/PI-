@@ -10,14 +10,8 @@ import {useEffect,useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 /* actions */
-import {getDrivers, getDriversByName,getDriversByTeam} from "../../redux/actions"
+import {getDrivers, getDriversByName,getDriversByTeam,getDriversByOrigin} from "../../redux/actions"
  
-
-
-//! lo enfoco de esta manera
-/* adentro de la funcion de los ordenamientos (ascendente,etc) ni bien la uso mando 
-un dispatch con getDrivers, entonces condiciono a que allDrivers sea lo que yo quiera
-y asi lo mismo en las otras funciones*/
 
 //! LE DEDICO TIEMPO Y LO HAGO LO MEJOR QUE PUEDO. VAMOS CARAJOOOO!!!
 //! COMPRENDO BIEN COMO FUNCIONA TODA LA LÒGICA ASI LA PUEDO EXPLICAR BIEN TAMBIÉN
@@ -32,6 +26,7 @@ function Home() {
   /* Estado local */
   const [searchString, setSearchString] = useState("");
   const [searchStringTeam, setSearchStringTeam] = useState("");
+
   
   /* const [activeButton, setActiveButton] = useState(null);
   const [driversForCards, setDriversForCards] = useState([])
@@ -63,21 +58,35 @@ function Home() {
     //console.log("acaDriverrsss", allDrivers);
   }
 
-  //!Falta hacer la logica
-  function handleSubmitOrigin(){
-    dispatch(getDriversByOrigin())
-    //console.log("acaDriverrsss", allDrivers);
-  }
+ 
 
   useEffect(()=>{
     dispatch(getDrivers());
     console.log("aca allDrivers###############",allDrivers);
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log("aca allDrivers actualizado:", allDrivers);
+  }, [allDrivers]);
+
+  function handleSubmitOrigin(origin){
+    // Despachar la acción con el argumento 
+    console.log("ACAORIGIN", origin);
+    dispatch(getDriversByOrigin(origin));
+    console.log("aca allDrivers###############",allDrivers);
+
+  }
+
   return (
     <div className={style.home}>
       <p className={style.title}>Home</p>
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
+      <div>
+      
+        <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
+        <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
+        <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
+      </div>
       <div>
         <input type="search" value={searchStringTeam} onChange={handleChangeTeam} />
           <button onClick={handleSubmitTeam}>Buscar Team</button>
