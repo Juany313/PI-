@@ -6,6 +6,7 @@ export default function SearchBar({ handleChange, handleSubmit }) {
 
   const handleInputChange = (e) => {
     setSearchValue(e.target.value);
+    
     handleChange(e);
   };
 

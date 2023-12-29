@@ -8,7 +8,7 @@ import Card from "../card/Card"
 
 import {Link} from "react-router-dom";
 
-function Cards({driversForCards}) {
+function Cards({driversForCards,allDriversCopy}) {
   //Cuando me llega una sola props hago el destructuring directo.
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
@@ -50,7 +50,6 @@ function Cards({driversForCards}) {
   
   // Si no se ha presionado ningún botón, usar allDrivers por props
    if (!activeButton) {
-    
     driversForCardRecorte = driversForCards.slice(valorPage.start, valorPage.end);
   } 
 
@@ -71,10 +70,10 @@ function Cards({driversForCards}) {
         }));
       }
   };
-  //const driverList = driversForCards.slice(valorPage.start, valorPage.end);
   console.log("estado del button", activeButton);
-console.log("aca en card lo que llega porprops,driversForCards ", driversForCards);
-console.log("aca en card lo que recorto ", driversForCardRecorte);
+  console.log("aca en card lo que llega porprops,driversForCards ", driversForCards);
+  console.log("aca en card lo que recorto ", driversForCardRecorte);
+  //console.log("aca en card lo que llega a allDriversCopy", allDriversCopy);
   return (
     <div>
         <h2>Ordenar:</h2>

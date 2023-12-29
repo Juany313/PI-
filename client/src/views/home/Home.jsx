@@ -27,30 +27,46 @@ function Home() {
   const dispatch = useDispatch();
   /* Estado global */
   const allDrivers = useSelector((state)=> state.allDrivers);
-  const driversCopy = useSelector((state)=> state.driversCopy);
+  const allDriversCopy = useSelector((state)=> state.driversCopy);
   
   /* Estado local */
   const [searchString, setSearchString] = useState("");
+  const [searchStringTeam, setSearchStringTeam] = useState("");
   
   /* const [activeButton, setActiveButton] = useState(null);
   const [driversForCards, setDriversForCards] = useState([])
    */
 
-  function handleChange(e){
-    setSearchString(e.target.value)
+  
+  function handleChange(e) {
+    setSearchString(e.target.value);
+  
+    if (e.target.value === "") {
+      dispatch(getDrivers());
+    }
+  }
+  function handleChangeTeam(e){
+    setSearchStringTeam(e.target.value)
+
+    if (e.target.value === "") {
+      dispatch(getDrivers());
+    }
   }
 
   function handleSubmit(){
+    console.log("aca lo que hay en searchString",searchString);
     dispatch(getDriversByName(searchString))
   }
   function handleSubmitTeam(){
-    console.log(searchString);
-    dispatch(getDriversByTeam(searchString))
+    console.log("aca lo que hay en searchStringTeam",searchStringTeam);
+    dispatch(getDriversByTeam(searchStringTeam))
     //console.log("acaDriverrsss", allDrivers);
-    /* setValorPage(() => ({
-      start: 0,
-      end: 9,
-    })); */
+  }
+
+  //!Falta hacer la logica
+  function handleSubmitOrigin(){
+    dispatch(getDriversByOrigin())
+    //console.log("acaDriverrsss", allDrivers);
   }
 
   useEffect(()=>{
@@ -63,7 +79,7 @@ function Home() {
       <p className={style.title}>Home</p>
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
       <div>
-        <input type="search" value={searchString} onChange={handleChange} />
+        <input type="search" value={searchStringTeam} onChange={handleChangeTeam} />
           <button onClick={handleSubmitTeam}>Buscar Team</button>
         </div>
       {/* <h2>Filtrar:</h2>
@@ -85,7 +101,7 @@ function Home() {
       </div>
  */}
 
-      <Cards driversForCards={allDrivers} />
+      <Cards driversForCards={allDrivers} allDriversCopy={allDriversCopy} />
     </div>
   );
   }
