@@ -1,6 +1,6 @@
 /* style */
 import style from './Home.module.css'; 
-
+import miImagen from '../../assets/fondoHome.jpg';
 /* components */
 import Navbar from "../../components/navbar/Nav"
 import Cards from "../../components/cards/Cards"
@@ -79,10 +79,11 @@ function Home() {
 
   return (
     <div className={style.home}>
+      <div className={style.nav}>
       <p className={style.title}>Home</p>
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
+      </div>
       <div>
-      
         <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
         <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
         <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
