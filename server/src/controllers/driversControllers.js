@@ -4,15 +4,16 @@ const {infoCleaner} = require("../utils/index");
 const axios = require("axios");
 
 
-const createDriverDB = async (name,lastName, teams, description, image, nationality, dob) => {
+const createDriverDB = async (name,lastName, teamsId, description, image, nationality, dob) => {
 
-//! mirar en orm II 43 min 
-
+    
     
         // Crear el conductor en la base de datos
         const newDriver = await Driver.create({ name,lastName, description, image, nationality, dob });
+        
+        newDriver.addTeams(teamsId);
 
-        newDriver.addTeams(teams);
+
         return newDriver;
 };
 

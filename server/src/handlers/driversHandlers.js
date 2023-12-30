@@ -1,5 +1,5 @@
 const {createDriverDB, getAllDrivers, getDriverById, getDriverByName,getDriverByTeam} = require("../controllers/driversControllers")
-const {getAllTeams} = require("../controllers/teamsControllers")
+const {getAllTeams,getAllTeamsInfo} = require("../controllers/teamsControllers")
 
 const getDriverHandler = async (req, res)=>{
     const {name, team} = req.query;
@@ -44,12 +44,38 @@ const getDetailHandler = async (req, res)=>{
 const createDriverHandler = async (req,res)=> {
     const {name,lastName, teams,description,image,nationality,dob} = req.body;
 
+//! de cada teams tengo que obtener el aid que tiene en la base de datos y mandar un arrar con los id
+//!falta corregir esto
+//console.log("###############teams", teams);
+try {
+    //*Si la bdd esta vacia llamo a  getAllTeams dentro de una constante y con await.
+    const driversTeams = await getAllTeams();
+    console.log("###############driversTeams", driversTeams);
+        
 
-    try {
-        //*Si la bdd esta vacia llamo a  getAllTeams dentro de una constante y con await.
-        const driversDb = await getAllTeams();
+        if (!teams || !Array.isArray(teams)) {
+            return res.status(400).json({ error: "La propiedad 'teams' debe ser un array definido." });
+        }
 
-        const response = await createDriverDB(name,lastName,teams,description,image,nationality,dob)
+        const driversTeamsInfo = await getAllTeamsInfo();
+        
+        let teamsId = [];
+
+        for (const team of teams) {
+            // Verifica que el equipo no sea nulo o indefinido antes de usar trim()
+            if (team && typeof team === 'string') {
+               
+      
+                const teamInfo = driversTeamsInfo.find(driverTeam => driverTeam.name.toLowerCase() === team.toLowerCase());
+      
+                if (teamInfo) {
+                    teamsId.push(teamInfo.id);
+                } else {
+                    console.log(`El equipo '${team}' no está presente en driverTeams.`);
+                }
+            }
+        }
+        const response = await createDriverDB(name,lastName,teamsId,description,image,nationality,dob)
         
         res.status(200).json(response);
     } catch (error) {

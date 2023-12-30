@@ -17,8 +17,8 @@ const validate = (driverData)=>{
     if (!driverData.dob) {
       errors.dob = 'Completar Campo!';
     }
-    if (driverData.Teams.length === 0) {
-      errors.Teams = 'Completar Campo!';
+    if (driverData.teams.length === 0) {
+      errors.teams = 'Completar Campo!';
     }
     return errors;
   };

@@ -4,7 +4,7 @@ import style from './Card.module.css';
 
 
 function Card({driver}) {
-  //console.log("acadriverrrrrrrrrrr", driver);
+  console.log("acadriverrrrrrrrrrr in carddddd", driver);
   //let lastname= "";
   const {name,image,Teams}=driver;
   

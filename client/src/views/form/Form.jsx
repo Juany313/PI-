@@ -31,13 +31,13 @@ import validate from "../../utils"
     
         setDriverData((prevDriverData) => ({
           ...prevDriverData,
-          Teams: nuevasOpcionesSeleccionadas,
+          teams: nuevasOpcionesSeleccionadas,
         }));
     
         // Validar Teams y actualizar errores
           const newErrors = validate({
             ...driverData,
-            Teams: nuevasOpcionesSeleccionadas,
+            teams: nuevasOpcionesSeleccionadas,
           });
 
           setErrors(newErrors);
@@ -63,7 +63,7 @@ import validate from "../../utils"
         description:'',
         nationality:'',
         dob:'',
-        Teams: [], // Inicializa Teams como un array vacío
+        teams: [], // Inicializa Teams como un array vacío
         
       });
       const [errors, setErrors] = useState({
@@ -72,7 +72,7 @@ import validate from "../../utils"
         description:'',
         nationality:'',
         dob:'',
-        Teams: ''
+        teams: ''
       });
 
       const handleChange = (event) => {
@@ -170,7 +170,7 @@ import validate from "../../utils"
       
       <div className="lista-teams-container">
       <button type="button" onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Seleccionar Teams'}</button>
-      {errors.Teams && <span>{errors.Teams}</span>}
+      {errors.teams && <span>{errors.teams}</span>}
       {mostrarLista && (
         <ul className="lista-teams">
           {allTeams?.map((opcion) => (
