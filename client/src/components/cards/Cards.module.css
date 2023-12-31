@@ -1,7 +1,11 @@
 .list {
     width: 80vw;
-    margin: 0 auto;
+    margin: 50px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+}
+
+.cards_container{
+    background-color: azure;
 }

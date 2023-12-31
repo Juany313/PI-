@@ -1,3 +1,70 @@
-.container{
-    color: black;
+/* body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+} */
+
+.detail_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../../assets/fondoHome.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Agrega esta línea */
+    overflow: hidden; /* Agrega esta línea */
+}
+.detail_container_butonn_home{
+    width: 100%;
+    text-align: start;
+    padding: 4em;
+}
+
+/* .detail_container_card{
+ display: flex;
+ flex: 1;
+ justify-content: space-around;
+
+} */
+
+.detail_img {
+    text-align: start;
+}
+.detail_img img {
+    margin-left: 29em;
+    width: 50em;
+    height: 75em;
+}
+
+.detail_container h3 {
+    color: yellow;
+    font-size: 5em;
+}
+.detail_etiqueta{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: yellow;
+}
+.detail_teams{
+    margin-left: 3em;
+}
+.detail_container p {
+    width: 40%;
+    height: auto;
+    margin-left: 10em;
+    text-align: start;
+    font-size: 3em;
+    color: yellow;
+}
+
+.detail_container button {
+    margin: 0.5em;
+    font-size: 2.5em;
 }

@@ -79,37 +79,18 @@ function Home() {
 
   return (
     <div className={style.home}>
-      <div className={style.nav}>
-      <p className={style.title}>Home</p>
-      <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
+      <div className={style.nav_container}>
+        <Navbar className={style.nav_container_navbar} handleChange={handleChange} handleSubmit={handleSubmit} />
+        <div>
+          <input className={style.buscar_team} type="search" value={searchStringTeam} onChange={handleChangeTeam} />
+            <button onClick={handleSubmitTeam}>Buscar Team</button>
+        </div>
       </div>
       <div>
         <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
         <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
         <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
       </div>
-      <div>
-        <input type="search" value={searchStringTeam} onChange={handleChangeTeam} />
-          <button onClick={handleSubmitTeam}>Buscar Team</button>
-        </div>
-      {/* <h2>Filtrar:</h2>
-      <div>
-        
-
-        <button
-          type="button"
-          className={activeButton === 'bdd' ? 'active' : 'noactive'}
-          onClick={() => handleOriginClick('bdd')}>
-            Drivers BDD
-        </button>
-        <button
-          type="button"
-          className={activeButton === 'api' ? 'active' : 'noactive'}
-          onClick={() => handleOriginClick('api')}>
-            Drivers Api
-        </button>
-      </div>
- */}
 
       <Cards driversForCards={allDrivers} allDriversCopy={allDriversCopy} />
     </div>

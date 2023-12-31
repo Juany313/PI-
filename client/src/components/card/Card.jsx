@@ -15,19 +15,26 @@ function Card({driver}) {
   return (
     
          
-      <div className={style.container}>
+      <div className={style.container_principal}>
         {/* <img src={imageAlternativa} alt="" /> */}
-        <img
-        src={image ? (typeof image === "string" ? image : image.url) : imageAlternativa}
-        alt=""
-      />
-        <h2>{(typeof name === "string")?name:(name.forename)}</h2>
-        {/* lastname!=="" && <p>Nombre: {lastname}</p> */}
-        <ul>
-        {Teams?.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-        </ul>
+        <div className={style.card_container}>
+            <div className={style.img_container}>
+              <img
+                src={image ? (typeof image === "string" ? image : image.url) : imageAlternativa}
+                alt=""
+              />
+            </div>
+            <div className={style.texto_container}>
+              <h2>{(typeof name === "string")?name:(name.forename)}</h2>
+              {/* lastname!=="" && <p>Nombre: {lastname}</p> */}
+              <ul>
+              {Teams?.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+              </ul>
+            </div>
+        </div>
+        
       </div>
     
   );

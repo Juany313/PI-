@@ -7,16 +7,19 @@ import style from './Nav.module.css';
 export default function Nav({handleChange, handleSubmit}) {
   return (
     <div className={style.nav}>
-      <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
-    <div className={style.buttons}>
       
-      <Link to="/">
-      <button>Landing</button>
-      </Link>
-      <Link to="/form">
-      <button>Crear Driver</button>
-      </Link>
-    </div>
+      <div className={style.buttons}>
+        <Link to="/">
+        <button>Landing</button>
+        </Link>
+        <Link to="/form">
+        <button>Crear Driver</button>
+        </Link>
+      </div>
+      
+      <div>
+        <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
+      </div>
       
     </div>
   );

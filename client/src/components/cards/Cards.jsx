@@ -75,7 +75,7 @@ function Cards({driversForCards,allDriversCopy}) {
   console.log("aca en card lo que recorto ", driversForCardRecorte);
   //console.log("aca en card lo que llega a allDriversCopy", allDriversCopy);
   return (
-    <div>
+    <div className={style.cards_container}>
         <h2>Ordenar:</h2>
       <div>
       <button

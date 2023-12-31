@@ -1,4 +1,4 @@
-.container {
+.container_principal {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,20 +7,49 @@
     border: 1px solid grey;
     border-radius: 5px;
     padding: 25px;
-    cursor: pointer;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
 }
 
-.container:hover {
+
+.card_container{
+  /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+  background-color: blueviolet;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+.card_container img {
+  width: 50em;
+  height: 75em;
+}
+
+.card_container:hover {
     transform: scale(1.05)
 }
 
-img{
-    width: 200px;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 10px;
+.img_container{
+  
+  width: 220px; /* Establece el ancho del contenedor según tus necesidades */
+  height: 230px; /* Establece la altura del contenedor según tus necesidades */
+  text-align: center; /* Centra horizontalmente */
+  display: flex; /* Centra verticalmente */
+  align-items: center; /* Centra verticalmente */
+  border: 1px solid #ccc; 
+}
+.img_container img{
+  max-width: 100%; /* La imagen no superará el ancho del contenedor */
+  max-height: 100%; /* La imagen no superará la altura del contenedor */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  display: block; /* Elimina el espacio adicional debajo de la imagen */
+  margin: auto; /* Centra la imagen dentro del contenedor */
+  }
+
+  .texto_container{
+    width: 40%;
+    background-color: aqua;
   }
 
   ul {

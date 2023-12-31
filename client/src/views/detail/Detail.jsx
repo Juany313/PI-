@@ -27,31 +27,42 @@ function Detail() {
  console.log("ACA IDDDDDDDDDDD",id);
   console.log("este es el driver", driver);
     return (
-      <div className={style.container}>
-        <Link  to={`/home`}>
-        <button>HOME</button>
-        </Link>
-        <p>ACA DETAIL</p>
-        <img
-        src={driver.image ? (typeof image === "string" ? driver.image : driver.image.url) : imageAlternativa}
-        alt=""
-      />
-        {driver.id && <h2>Id: {driver.id}</h2>}
-        {driver.name && <h2>Nombre: {driver.name}</h2>}
-        {driver.lastName && <h2>Apellido: {driver.lastName}</h2>}
-        {driver.nationality && <h2>Nacionalidad: {driver.nationality}</h2>}
-        {driver.dob && <p>Fecha de Nacimiento: {driver.dob}</p>}
-        {driver.description && <p>Descripción: {driver.description}</p>}
-        {driver.Teams && (
-      <div>
-        <h2>Escuderías:</h2>
-        <ul>
-          {driver.Teams.map((team, index) => (
-            <li key={index}>{team}</li>
-          ))}
-        </ul>
-      </div>
-    )}
+      <div className={style.detail_container}>
+        <div className={style.detail_container_butonn_home}>
+          <Link  to={`/home`}>
+          <button>HOME</button>
+          </Link>
+        </div>
+        <div className={style.detail_container_card}>
+          <div className={style.detail_img}>
+            <img
+            src={driver.image ? (typeof image === "string" ? driver.image : driver.image.url) : imageAlternativa}
+            alt=""
+            />
+          </div>
+          <div>
+              {driver.id && <p><span className={style.detail_etiqueta}>Id:</span> {driver.id}</p>}
+              {driver.name && <p><span className={style.detail_etiqueta}>Nombre:</span> {driver.name}</p>}
+              {driver.lastName && <p><span className={style.detail_etiqueta}>Apellido:</span> {driver.lastName}</p>}
+              {driver.nationality && <p><span className={style.detail_etiqueta}>Nacionalidad:</span> {driver.nationality}</p>}
+              {driver.dob && <p><span className={style.detail_etiqueta}>Fecha de Nacimiento:</span> {driver.dob}</p>}
+              {driver.description && <p><span className={style.detail_etiqueta}>Descripción:</span></p>}
+              {driver.description && <p>{driver.description}</p>}
+
+              {driver.Teams && (
+                <div>
+                  <p><span className={style.detail_etiqueta}>Escuderías:</span></p>
+                  <p>
+                    {driver.Teams.map((team, index) => (
+                      <span className={style.detail_teams} key={index}>{team}</span>
+                    ))}
+                  </p>
+                </div>
+              )}
+          </div>
+        </div>
+        
+        
           
       </div>
     )
