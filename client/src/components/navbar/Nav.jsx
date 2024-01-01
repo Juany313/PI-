@@ -1,5 +1,5 @@
 import SearchBar from "../searchBar/SearchBar";
-import {Link} from "react-router-dom"
+
 /* styles */
 import style from './Nav.module.css';
 
@@ -8,14 +8,7 @@ export default function Nav({handleChange, handleSubmit}) {
   return (
     <div className={style.nav}>
       
-      <div className={style.buttons}>
-        <Link to="/">
-        <button>Landing</button>
-        </Link>
-        <Link to="/form">
-        <button>Crear Driver</button>
-        </Link>
-      </div>
+      
       
       <div>
         <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />

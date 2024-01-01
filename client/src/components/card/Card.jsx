@@ -15,7 +15,7 @@ function Card({driver}) {
   return (
     
          
-      <div className={style.container_principal}>
+      <div className={style.container_principal_card}>
         {/* <img src={imageAlternativa} alt="" /> */}
         <div className={style.card_container}>
             <div className={style.img_container}>

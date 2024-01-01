@@ -75,10 +75,10 @@ function Cards({driversForCards,allDriversCopy}) {
   console.log("aca en card lo que recorto ", driversForCardRecorte);
   //console.log("aca en card lo que llega a allDriversCopy", allDriversCopy);
   return (
-    <div className={style.cards_container}>
-        <h2>Ordenar:</h2>
-      <div>
-      <button
+    <div className={style.cards_container_principal}>
+      <h2>Ordenar:</h2>
+      <div className={style.cards_container_principal_but}>
+      <button 
         type="button"
         className={activeButton === 'ascendente' ? 'active' : 'noactive'}
         onClick={() => handleButtonClick('ascendente')}
@@ -107,7 +107,7 @@ function Cards({driversForCards,allDriversCopy}) {
         Reset
       </button>
       </div> 
-       <div>
+      <div>
           <button type="button" onClick={handlePrevClick}>
             Prev
           </button>

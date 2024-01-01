@@ -6,9 +6,12 @@ body {
 
 .nav_container{
     display: flex;
-    background-color: #0ccac4;
+    justify-content: center;
+    /* background-color: #0ccac4; */
     width: 100vw;
-    height: auto;
+    height: 10vh;
+    margin-bottom: 1vh;
+
 }
 .nav_container_navbar{
     width: 70%;
@@ -35,10 +38,25 @@ body {
 
 .home button {
     margin: 0 0.5em;
-    font-size: 2.5em;
+
+    padding: 0.3em 0.5em;
+    font-size: 4em;
+    
+    transition: all 0.9s ease;
 }
-.home input {
-    font-size: 2.5em;
+.home button:hover {
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
 }
+.nav_container input {
+    font-size: 4em;
+    width: 6em;
+}
+
+
+
+
 
   

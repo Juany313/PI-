@@ -6,10 +6,12 @@
 html,body {
   padding: 0;
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
+#root{
+  height: 100vh;
+  box-sizing: border-box;
+}
 
 a {
   font-weight: 500;
@@ -45,31 +47,5 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Para las vistas */
 
-#root{
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box; /* Opcional, según tus necesidades */
 
-}
-/* 
-.landing_body {
-  margin: 0; 
-.home_body{
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-.detail_body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  background-color: #101c1c;
-}
-.form_body{
-  margin: 0;
-  padding: 0;
-  background-color: blue;
-  
-} */

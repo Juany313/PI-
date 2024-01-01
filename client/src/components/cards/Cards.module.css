@@ -6,6 +6,21 @@
     grid-gap: 50px;
 }
 
-.cards_container{
-    background-color: azure;
+.cards_container_principal{
+    /* background-color: pink; */
+    height: 80vh;
+}
+.cards_container_but {
+    margin: 0 0.5em;
+
+    padding: 0.3em 0.5em;
+    font-size: 4em;
+    
+    transition: all 0.9s ease;
+}
+.cards_container_but :hover {
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
 }

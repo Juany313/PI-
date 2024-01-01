@@ -10,20 +10,26 @@
     background-image: url('../../assets/fondoLanding.jpg');
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Agrega esta línea */
+    overflow: hidden; 
   }
   .title {
+    margin-top: 3em;
     font-size: 100px;
-    /* line-height: 1.1; */
+    position: relative;
+    left: 56px;
+    text-shadow: 2px 2px 5px yellow; 
   }
   .but{
-    padding: 10px;
-    font-size: 80px;
-    width: 400px;
+    position: relative;
+    left: 56px;
+    padding: 0.3em;
+    font-size: 4em;
+    width: 5em;
+    transition: all 0.9s ease;
   }
 
   .but:hover {
-    border: 8px solid #1a1a1a;
+    border: 2px solid #1a1a1a;
     border-radius: 20px;
     background-color: #41e6e5;
     color: #1a1a1a;

@@ -8,6 +8,7 @@ import Cards from "../../components/cards/Cards"
 /* dependencias */
 import {useEffect,useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom"
 
 /* actions */
 import {getDrivers, getDriversByName,getDriversByTeam,getDriversByOrigin} from "../../redux/actions"
@@ -80,17 +81,25 @@ function Home() {
   return (
     <div className={style.home}>
       <div className={style.nav_container}>
-        <Navbar className={style.nav_container_navbar} handleChange={handleChange} handleSubmit={handleSubmit} />
-        <div>
-          <input className={style.buscar_team} type="search" value={searchStringTeam} onChange={handleChangeTeam} />
-            <button onClick={handleSubmitTeam}>Buscar Team</button>
-        </div>
+      
+          <Link to="/">
+          <button>Landing</button>
+          </Link>
+          <Link to="/form">
+          <button>Crear Driver</button>
+          </Link>
+        
+          <div>
+            <Navbar className={style.nav_container_navbar} handleChange={handleChange} handleSubmit={handleSubmit} />
+              <input className={style.buscar_team} type="search" value={searchStringTeam} onChange={handleChangeTeam} />
+                <button onClick={handleSubmitTeam}>Buscar Team</button>
+            
+            <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
+            <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
+            <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
+          </div>
       </div>
-      <div>
-        <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
-        <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
-        <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
-      </div>
+      
 
       <Cards driversForCards={allDrivers} allDriversCopy={allDriversCopy} />
     </div>
