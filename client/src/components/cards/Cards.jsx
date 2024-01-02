@@ -70,51 +70,46 @@ function Cards({driversForCards,allDriversCopy}) {
         }));
       }
   };
-  console.log("estado del button", activeButton);
-  console.log("aca en card lo que llega porprops,driversForCards ", driversForCards);
-  console.log("aca en card lo que recorto ", driversForCardRecorte);
-  //console.log("aca en card lo que llega a allDriversCopy", allDriversCopy);
+  
   return (
     <div className={style.cards_container_principal}>
-      <h2>Ordenar:</h2>
       <div className={style.cards_container_principal_but}>
-      <button 
-        type="button"
-        className={activeButton === 'ascendente' ? 'active' : 'noactive'}
-        onClick={() => handleButtonClick('ascendente')}
-      >
-        Ascendente
-      </button>
-      <button
-        type="button"
-        className={activeButton === 'descendente' ? 'active' : 'noactive'}
-        onClick={() => handleButtonClick('descendente')}
-      >
-        Descendente
-      </button>
-      <button
-        type="button"
-        className={activeButton === 'fechaNacimiento' ? 'active' : 'noactive'}
-        onClick={() => handleButtonClick('fechaNacimiento')}
-      >
-        Fecha de Nacimiento
-      </button>
-      <button
-        type="button"
-        className={activeButton === 'sinOrden' ? 'active' : 'noactive'}
-        onClick={() => handleButtonClick('sinOrden')}
-      >
-        Reset
-      </button>
-      </div> 
-      <div>
+          <button 
+            type="button"
+            className={activeButton === 'ascendente' ? 'active' : 'noactive'}
+            onClick={() => handleButtonClick('ascendente')}
+          >
+            Ascendente
+          </button>
+          <button
+            type="button"
+            className={activeButton === 'descendente' ? 'active' : 'noactive'}
+            onClick={() => handleButtonClick('descendente')}
+          >
+            Descendente
+          </button>
+          <button
+            type="button"
+            className={activeButton === 'fechaNacimiento' ? 'active' : 'noactive'}
+            onClick={() => handleButtonClick('fechaNacimiento')}
+          >
+            Fecha de Nacimiento
+          </button>
+          <button
+            type="button"
+            className={activeButton === 'sinOrden' ? 'active' : 'noactive'}
+            onClick={() => handleButtonClick('sinOrden')}
+          >
+            Reset
+          </button>
           <button type="button" onClick={handlePrevClick}>
             Prev
           </button>
           <button type="button" onClick={handleNextClick}>
             Next
           </button>
-      </div>
+         
+      </div> 
       <div className={style.list}>
 
       {(Array.isArray(driversForCardRecorte)) && driversForCardRecorte.map((driver)=>{

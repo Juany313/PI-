@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    
+}
+.container_principal{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../../assets/fondoHome.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Agrega esta línea */
+    overflow: hidden; /* Agrega esta línea */
+}
+
+.container{
+    margin-left: 3em;
+    background-color: aqua;
+    width: 50vw;
+    height: 90vh;
+}
+
+.container_butonn {
+    display: flex;
+    justify-content: start;
+    margin: 0 0.5em;
+
+    padding: 0.3em 0.5em;
+    font-size: 4em;
+    
+    transition: all 0.9s ease;
+}
+.container_butonn button:hover{
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
+}
+
+.container_form{
+    text-align: start;
+    width: 90%;
+    height: 90%;
+    background-color: #8f7171;
+    font-size: 6em;
+    padding: 3em;
+}
+.container_form button{
+    font-size: 0.6em;
+    margin-bottom: 0.5em;
+}
+.container_form input{
+    font-size: 0.6em;
+}
+.container_form span{
+    font-size: 0.7em;
+    color: azure;
+}
+
+.lista_teams_scrollable {
+    margin-bottom: 0.5em;
+    max-height: 550px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto; /* Agrega scroll vertical cuando el contenido es demasiado grande */
+  }
+  
+  .lista_teams input[type="checkbox"] {
+    font-size: 2em;
+    color: #41e6e5;
+  }

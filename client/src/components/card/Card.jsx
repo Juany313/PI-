@@ -1,6 +1,7 @@
 import style from './Card.module.css';
 
-
+/* imagen */
+import miImagen from '../../assets/imgPiloto.jpg';
 
 
 function Card({driver}) {
@@ -10,8 +11,8 @@ function Card({driver}) {
   
 //!ENCONTRAR UNA IMAGEN ALTERNATIVA SIN DERECHOS DE AUTOR DE UN DRIVER
 
-  const imageAlternativa = "https://wallpapers.com/images/featured/universe-qs811igzbabl1m0o.jpg"
-  //console.log("imageeee", image);
+const imageAlternativa = miImagen
+
   return (
     
          
@@ -19,19 +20,26 @@ function Card({driver}) {
         {/* <img src={imageAlternativa} alt="" /> */}
         <div className={style.card_container}>
             <div className={style.img_container}>
-              <img
-                src={image ? (typeof image === "string" ? image : image.url) : imageAlternativa}
-                alt=""
-              />
+            <img
+            src={
+              image ?
+               (typeof image === "string" ?image
+               : (image.url===""?imageAlternativa:image.url)) 
+               : imageAlternativa}
+            alt=""
+            />
             </div>
             <div className={style.texto_container}>
+              <div className={style.texto_container_name}>
+
               <h2>{(typeof name === "string")?name:(name.forename)}</h2>
+              </div>
               {/* lastname!=="" && <p>Nombre: {lastname}</p> */}
-              <ul>
+              <div className={style.texto_container_teams}>
               {Teams?.map((item, index) => (
-                <li key={index}>{item}</li>
+                <span key={index}>{item}</span>
               ))}
-              </ul>
+              </div>
             </div>
         </div>
         
