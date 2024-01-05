@@ -1,7 +1,7 @@
 const validate = (driverData)=>{
         
     let errors = {};
-/* Sabri recomienda hacer un if elseif si es necesario por cada campo */
+
     if (!driverData.name) {
       errors.name = 'Completar Campo!';
     }
@@ -24,7 +24,4 @@ const validate = (driverData)=>{
   };
 
   export default validate;
-        // lastName: '',
-        // description:'',
-        // nationality:'',
-        // dob:''
+        

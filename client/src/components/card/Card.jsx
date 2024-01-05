@@ -5,11 +5,9 @@ import miImagen from '../../assets/imgPiloto.jpg';
 
 
 function Card({driver}) {
-  console.log("acadriverrrrrrrrrrr in carddddd", driver);
-  //let lastname= "";
+
   const {name,image,Teams}=driver;
   
-//!ENCONTRAR UNA IMAGEN ALTERNATIVA SIN DERECHOS DE AUTOR DE UN DRIVER
 
 const imageAlternativa = miImagen
 
@@ -17,7 +15,7 @@ const imageAlternativa = miImagen
     
          
       <div className={style.container_principal_card}>
-        {/* <img src={imageAlternativa} alt="" /> */}
+        
         <div className={style.card_container}>
             <div className={style.img_container}>
             <img
@@ -34,7 +32,7 @@ const imageAlternativa = miImagen
 
               <h2>{(typeof name === "string")?name:(name.forename)}</h2>
               </div>
-              {/* lastname!=="" && <p>Nombre: {lastname}</p> */}
+              
               <div className={style.texto_container_teams}>
               {Teams?.map((item, index) => (
                 <span key={index}>{item}</span>
@@ -49,13 +47,3 @@ const imageAlternativa = miImagen
 }
 
 export default Card;
-/* 
-        ID.
-      Nombre.
-      Apellido.
-      Nacionalidad.
-      Imagen.
-      Descripción.
-      Fecha de Nacimiento.
-      Escuderías.
-  */

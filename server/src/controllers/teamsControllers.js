@@ -10,7 +10,7 @@ const getAllTeams = async () => {
     
     const infoApi = (await axios.get(`http://localhost:5000/drivers`)).data;
 
-            infoApi.forEach(element => {
+    infoApi.forEach(element => {
                 teams.push(element.teams);
             });
 
@@ -59,10 +59,10 @@ const getAllTeamsInfo = async () => {
       return [];
     }
   
-    // Si la base de datos no está vacía, construye un array de objetos con id y name
+    //construye un array de objetos con id y name
     const teamsInfo = teamsDB.map(team => ({ id: team.id, name: team.name }));
   
-    // ... tu código existente para obtener los equipos de la API y procesarlos ...
+   
   
     return teamsInfo;
   };

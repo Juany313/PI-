@@ -9,7 +9,7 @@ function Landing() {
   return (
     
       <div className={style.container}>
-        <h1 className={style.title}>  ARE YOU READY?</h1>
+        <h1 className={style.title}>  WELCOME!</h1>
         <Link  to={`/home`}>
         <button className={style.but}>HOME</button>
         </Link>

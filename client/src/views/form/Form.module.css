@@ -20,7 +20,6 @@ body {
 
 .container{
     margin-left: 3em;
-    background-color: aqua;
     width: 50vw;
     height: 90vh;
 }
@@ -44,9 +43,9 @@ body {
 
 .container_form{
     text-align: start;
+    color: yellow;
     width: 90%;
     height: 90%;
-    background-color: #8f7171;
     font-size: 6em;
     padding: 3em;
 }
@@ -70,5 +69,4 @@ body {
   
   .lista_teams input[type="checkbox"] {
     font-size: 2em;
-    color: #41e6e5;
   }

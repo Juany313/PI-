@@ -8,7 +8,7 @@ import Card from "../card/Card"
 
 import {Link} from "react-router-dom";
 
-function Cards({driversForCards,allDriversCopy}) {
+function Cards({driversForCards}) {
   //Cuando me llega una sola props hago el destructuring directo.
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
@@ -21,7 +21,7 @@ function Cards({driversForCards,allDriversCopy}) {
     setActiveButton(buttonType);
   
     // Lógica de ordenación según el tipo de botón
-    let sortedDrivers = [...driversForCards];
+    let sortedDrivers = [];
   
     if (buttonType === 'ascendente') {
       // Ordenar alfabéticamente ascendente
@@ -34,10 +34,10 @@ function Cards({driversForCards,allDriversCopy}) {
       sortedDrivers = [...driversForCards].sort((a, b) => new Date(a.dob) - new Date(b.dob));
     } else if (buttonType === 'sinOrden') {
       // Ordenar como cuando carga la página
-      //sortedDrivers = [...driversForCards];
+      
       setActiveButton(null);
     }
-  console.log("aca lo que hay en sortedDrivers",sortedDrivers);
+
     // Actualizar el estado con la lista ordenada
     setDriversForCard(sortedDrivers);
   

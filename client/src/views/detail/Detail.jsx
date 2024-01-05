@@ -25,8 +25,6 @@ function Detail() {
     });
     return setDriver({});
  }, [id]);
- console.log("ACA IDDDDDDDDDDD",id);
-  console.log("este es el driver", driver);
     return (
       <div className={style.detail_container}>
         <div className={style.detail_container_butonn_home}>

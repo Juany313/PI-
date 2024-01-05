@@ -44,8 +44,7 @@ const getDetailHandler = async (req, res)=>{
 const createDriverHandler = async (req,res)=> {
     const {name,lastName, teams,description,image,nationality,dob} = req.body;
 
-//! de cada teams tengo que obtener el aid que tiene en la base de datos y mandar un arrar con los id
-//!falta corregir esto
+
 //console.log("###############teams", teams);
 try {
     //*Si la bdd esta vacia llamo a  getAllTeams dentro de una constante y con await.

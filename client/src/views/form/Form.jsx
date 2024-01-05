@@ -15,10 +15,36 @@ import validate from "../../utils"
 
   function Form() {
 
-    /* aca va lo referido a la lista de teams */
     const [mostrarLista, setMostrarLista] = useState(false);
     const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
+    const [driverData, setDriverData] = useState({
+      name: '',
+      lastName: '',
+      description:'',
+      nationality:'',
+      dob:'',
+      teams: [], 
+      
+    });
+    const [errors, setErrors] = useState({
+      name: '',
+      lastName: '',
+      description:'',
+      nationality:'',
+      dob:'',
+      teams: ''
+    });
 
+    
+    /* Estado global */
+    const dispatch = useDispatch();
+    const allTeams = useSelector((state)=> state.allTeams);
+    
+    useEffect(()=>{
+      dispatch(getTeams());
+    }, [dispatch]);
+    
+    
     const toggleMostrarLista = () => {
       setMostrarLista(!mostrarLista);
     };
@@ -46,34 +72,7 @@ import validate from "../../utils"
       });
     };
 
-
-    /* Estado global */
-    const dispatch = useDispatch();
-    const allTeams = useSelector((state)=> state.allTeams);
       
-      useEffect(()=>{
-        dispatch(getTeams());
-      }, [dispatch]);
-      
-   
-
-      const [driverData, setDriverData] = useState({
-        name: '',
-        lastName: '',
-        description:'',
-        nationality:'',
-        dob:'',
-        teams: [], // Inicializa Teams como un array vacío
-        
-      });
-      const [errors, setErrors] = useState({
-        name: '',
-        lastName: '',
-        description:'',
-        nationality:'',
-        dob:'',
-        teams: ''
-      });
 
       const handleChange = (event) => {
         const property = event.target.name;
@@ -84,19 +83,14 @@ import validate from "../../utils"
         setErrors((prevErrors) => {
           const newErrors = validate({
             ...driverData,
-            [property]: value,  // Usa event.target.name aquí
+            [property]: value, 
           });
       
-          // Realiza acciones adicionales si es necesario después de actualizar los errores
-      
-          return newErrors;
-        });
-      };
-      
 
-        console.log("acateammmmmmss", opcionesSeleccionadas);
-        console.log("acaerrors",errors);
-        console.log("acadriverdataaaaaaa",driverData);
+          return newErrors;
+          });
+        };
+      
         
         const handleSubmit = (event) => {
           event.preventDefault();
@@ -170,29 +164,6 @@ import validate from "../../utils"
                 {errors.dob && <span>{errors.dob}</span>}
               </div>
               
-              {/* <div className="lista-teams-container">
-              <button type="button" onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Seleccionar Teams'}</button>
-              {errors.teams && <span>{errors.teams}</span>}
-              {mostrarLista && (
-                <ul className="lista-teams">
-                  {allTeams?.map((opcion) => (
-                    <li key={opcion}>
-                      <input
-                        type="checkbox"
-                        id={opcion}
-                        value={opcion}
-                        checked={opcionesSeleccionadas.includes(opcion)}
-                        onChange={() => handleCheckboxChange(opcion)}
-                      />
-                      <label htmlFor={opcion} style={{ color: opcionesSeleccionadas.includes(opcion) ? 'yellow' : 'black' }}>
-                        {opcion}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
- */}
 
                 <div className="lista-teams-container">
                   <button type="button" onClick={toggleMostrarLista}>{mostrarLista ? 'Ocultar Lista' : 'Seleccionar Teams'}</button>
@@ -209,7 +180,7 @@ import validate from "../../utils"
                               checked={opcionesSeleccionadas.includes(opcion)}
                               onChange={() => handleCheckboxChange(opcion)}
                             />
-                            <label htmlFor={opcion} style={{ color: opcionesSeleccionadas.includes(opcion) ? 'yellow' : 'black' }}>
+                            <label htmlFor={opcion} style={{ color: opcionesSeleccionadas.includes(opcion) ? 'pink' : 'yellow' }}>
                               {opcion}
                             </label>
                           </li>

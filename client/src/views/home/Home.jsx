@@ -1,6 +1,7 @@
 /* style */
 import style from './Home.module.css'; 
 import miImagen from '../../assets/fondoHome.jpg';
+
 /* components */
 import Navbar from "../../components/navbar/Nav"
 import Cards from "../../components/cards/Cards"
@@ -14,24 +15,18 @@ import {Link} from "react-router-dom"
 import {getDrivers, getDriversByName,getDriversByTeam,getDriversByOrigin} from "../../redux/actions"
  
 
-//! LE DEDICO TIEMPO Y LO HAGO LO MEJOR QUE PUEDO. VAMOS CARAJOOOO!!!
-//! COMPRENDO BIEN COMO FUNCIONA TODA LA LÒGICA ASI LA PUEDO EXPLICAR BIEN TAMBIÉN
 
 function Home() {
 
   const dispatch = useDispatch();
   /* Estado global */
   const allDrivers = useSelector((state)=> state.allDrivers);
-  const allDriversCopy = useSelector((state)=> state.driversCopy);
   
   /* Estado local */
   const [searchString, setSearchString] = useState("");
   const [searchStringTeam, setSearchStringTeam] = useState("");
 
   
-  /* const [activeButton, setActiveButton] = useState(null);
-  const [driversForCards, setDriversForCards] = useState([])
-   */
 
   
   function handleChange(e) {
@@ -52,32 +47,24 @@ function Home() {
   function handleSubmit(){
     console.log("aca lo que hay en searchString",searchString);
     dispatch(getDriversByName(searchString))
+    
   }
   function handleSubmitTeam(){
     console.log("aca lo que hay en searchStringTeam",searchStringTeam);
     dispatch(getDriversByTeam(searchStringTeam))
     //console.log("acaDriverrsss", allDrivers);
   }
-
+  function handleSubmitOrigin(origin){
+    // Despachar la acción con el argumento 
+    dispatch(getDriversByOrigin(origin));
+  }
   
   
 
   useEffect(()=>{
     dispatch(getDrivers());
-    console.log("aca allDrivers###############",allDrivers);
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("aca allDrivers actualizado:", allDrivers);
-  }, [allDrivers]);
-
-  function handleSubmitOrigin(origin){
-    // Despachar la acción con el argumento 
-    console.log("ACAORIGIN", origin);
-    dispatch(getDriversByOrigin(origin));
-    console.log("aca allDrivers###############",allDrivers);
-
-  }
 
   return (
     <div className={style.home}>
@@ -102,7 +89,7 @@ function Home() {
       </div>
       
 
-      <Cards driversForCards={allDrivers} allDriversCopy={allDriversCopy} />
+      <Cards driversForCards={allDrivers}  />
     </div>
   );
   }
