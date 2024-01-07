@@ -22,6 +22,7 @@ function Home() {
   /* Estado global */
   const allDrivers = useSelector((state)=> state.allDrivers);
   
+  
   /* Estado local */
   const [searchString, setSearchString] = useState("");
   const [searchStringTeam, setSearchStringTeam] = useState("");

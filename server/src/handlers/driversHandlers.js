@@ -27,9 +27,6 @@ const getDriverHandler = async (req, res)=>{
 
 const getDetailHandler = async (req, res)=>{
     const{id} = req.params;
-    //const source = isNaN(id)? "bbd" : "api";
-    // hhjl4k5-45kj-45kkk ---> NaN ---> source="bbd"
-    // 4 ---> source="api"
   
     try {
         const response = await getDriverById(id)

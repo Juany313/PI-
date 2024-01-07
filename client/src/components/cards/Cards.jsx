@@ -2,6 +2,9 @@ import style from './Cards.module.css';
 
 /* dependencias */
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
+
 
 /* components */
 import Card from "../card/Card"
@@ -13,9 +16,12 @@ function Cards({driversForCards}) {
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
   /* ESTADOS LOCALES */
-  const [valorPage, setValorPage] = useState({ start: 0, end: 9 });
+  const [valorPage, setValorPage] = useState({ start: 0,numero:1, end: 9 });
   const [driversForCard, setDriversForCard] = useState([])
   const [activeButton, setActiveButton] = useState(null);
+  /* setValorPage(valorPage) */
+
+  
 
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType);
@@ -42,9 +48,12 @@ function Cards({driversForCards}) {
     setDriversForCard(sortedDrivers);
   
     // Resetear la paginación
-    setValorPage(() => ({ start: 0, end: 9 }));
+    setValorPage(() => ({ start: 0,numero:1, end: 9 }));
   };
   
+  
+  
+
   
   let driversForCardRecorte = driversForCard.slice(valorPage.start, valorPage.end);
   
@@ -58,6 +67,7 @@ function Cards({driversForCards}) {
       setValorPage((prevState) => ({
         start: prevState.start - 9,
         end: prevState.end - 9,
+        numero: prevState.numero -1
       }));
     }
   };
@@ -67,6 +77,7 @@ function Cards({driversForCards}) {
         setValorPage((prevState) => ({
         start: prevState.start + 9,
         end: prevState.end + 9,
+        numero: prevState.numero +1
         }));
       }
   };
@@ -104,6 +115,9 @@ function Cards({driversForCards}) {
           </button>
           <button type="button" onClick={handlePrevClick}>
             Prev
+          </button>
+          <button type="button" onClick={handlePrevClick}>
+          {valorPage.numero}
           </button>
           <button type="button" onClick={handleNextClick}>
             Next

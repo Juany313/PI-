@@ -5,6 +5,7 @@ export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const GET_TEAMS = "GET_TEAMS";
 export const GET_DRIVERS_BY_TEAM = "GET_DRIVERS_BY_TEAM";
 export const GET_DRIVERS_BY_ORIGIN = "GET_DRIVERS_BY_ORIGIN";
+export const GET_VALOR_PAGE = "GET_VALOR_PAGE";
 
 export const POST_DRIVER = 'POST_DRIVER';
 
@@ -42,12 +43,12 @@ export function getDriversByName(name){
         })
     }
 }
-export function getDriversByTeam(team){
+export function getDriversByTeam(team,valor){
     return async function(dispatch){
         const response = await axios(`http://localhost:3001/drivers?team=${team}`)
         return dispatch({
             type: GET_DRIVERS_BY_TEAM,
-            payload: response.data
+            payload: {response:response.data, valor}
         })
     }
 }
@@ -77,5 +78,14 @@ export function getTeams(){
         })
     }
 }
+export function getValorPage(valorPage){
+        return function(dispatch){
+
+            return dispatch({
+                type: GET_VALOR_PAGE,
+                payload: valorPage
+            })
+        }
+    }
 
 
