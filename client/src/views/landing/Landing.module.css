@@ -14,7 +14,7 @@
   }
   .title {
     margin-top: 3em;
-    font-size: 100px;
+    font-size: 60px;
     position: relative;
     left: 56px;
     text-shadow: 2px 2px 5px yellow; 
@@ -23,7 +23,7 @@
     position: relative;
     left: 56px;
     padding: 0.3em;
-    font-size: 4em;
+    font-size: 1.5em;
     width: 5em;
     transition: all 0.9s ease;
   }

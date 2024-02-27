@@ -9,9 +9,9 @@ body {
     justify-content: center;
     /* background-color: #0ccac4; */
     width: 100vw;
-    height: 7vh;
-    margin-top: 6vh;
-    margin-bottom: 6vh;
+    height: 5vh;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
 
 }
 .nav_container_navbar{
@@ -21,9 +21,10 @@ body {
     width: 30%;
 }
 .home {
+    padding: 30px;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -42,7 +43,7 @@ body {
     margin: 0 0.5em;
 
     padding: 0.3em 0.5em;
-    font-size: 4em;
+    font-size: 1.5em;
     
     transition: all 0.9s ease;
 }
@@ -53,8 +54,8 @@ body {
     color: #1a1a1a;
 }
 .nav_container input {
-    font-size: 4em;
-    width: 6em;
+    font-size: 1.5em;
+    width: 4em;
 }
 
 

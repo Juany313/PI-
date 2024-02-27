@@ -4,7 +4,10 @@ import style from './Cards.module.css';
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-
+/* actions */
+import { advancePage, goBackPage, setCurrentPage } from '../../redux/actions';
+/* para usar con estas actions */
+const itemsPerPage = 9; // Número de objetos por página
 
 /* components */
 import Card from "../card/Card"
@@ -16,12 +19,38 @@ function Cards({driversForCards}) {
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
   /* ESTADOS LOCALES */
-  const [valorPage, setValorPage] = useState({ start: 0,numero:1, end: 9 });
+  
   const [driversForCard, setDriversForCard] = useState([])
   const [activeButton, setActiveButton] = useState(null);
-  /* setValorPage(valorPage) */
+ 
 
+  /* ESTADO GLOBAL */
+  const currentPage = useSelector((state) => state.currentPage);
+  const dispatch = useDispatch();
+  console.log("###########current PAGEEEE ACAA; ",currentPage);
+  //!#####################################################################################
+  //! TENGO QUE VER PORQUE ESTO ME DA UNDIFINED Y HACER CORRECCIONES!!
+  console.log("###########current startIndex ACAA; ",startIndex);
+  console.log("###########current endIndex ACAA; ",endIndex);
+
+  // Calcula el índice de inicio y fin del array para la página actual
+  var startIndex = (currentPage - 1) * itemsPerPage;
+  var endIndex = startIndex + itemsPerPage;
   
+
+  /* PAGINADO */
+  const nextPage = () => {
+    dispatch(advancePage());
+  };
+
+  const prevPage = () => {
+    dispatch(goBackPage());
+  };
+
+  const goToPage = (page) => {
+    dispatch(setCurrentPage(page));
+  };
+
 
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType);
@@ -46,41 +75,18 @@ function Cards({driversForCards}) {
 
     // Actualizar el estado con la lista ordenada
     setDriversForCard(sortedDrivers);
+  }
   
-    // Resetear la paginación
-    setValorPage(() => ({ start: 0,numero:1, end: 9 }));
-  };
+  console.log("driversforcarddddddddddddddddd", driversForCard );
   
-  
-  
-
-  
-  let driversForCardRecorte = driversForCard.slice(valorPage.start, valorPage.end);
+  let driversForCardRecorte = driversForCard.slice(startIndex, endIndex);
   
   // Si no se ha presionado ningún botón, usar allDrivers por props
    if (!activeButton) {
-    driversForCardRecorte = driversForCards.slice(valorPage.start, valorPage.end);
+    driversForCardRecorte = driversForCards.slice(startIndex, endIndex);
   } 
 
-  const handlePrevClick = () => {
-    if (valorPage.start > 0) {
-      setValorPage((prevState) => ({
-        start: prevState.start - 9,
-        end: prevState.end - 9,
-        numero: prevState.numero -1
-      }));
-    }
-  };
-
-  const handleNextClick = () => {
-      if (valorPage.end < driversForCards.length) {
-        setValorPage((prevState) => ({
-        start: prevState.start + 9,
-        end: prevState.end + 9,
-        numero: prevState.numero +1
-        }));
-      }
-  };
+ 
   
   return (
     <div className={style.cards_container_principal}>
@@ -113,13 +119,13 @@ function Cards({driversForCards}) {
           >
             Reset
           </button>
-          <button type="button" onClick={handlePrevClick}>
+          <button type="button" onClick={prevPage}>
             Prev
           </button>
-          <button type="button" onClick={handlePrevClick}>
+          {/* <button type="button" onClick={handlePrevClick}>
           {valorPage.numero}
-          </button>
-          <button type="button" onClick={handleNextClick}>
+          </button> */}
+          <button type="button" onClick={nextPage}>
             Next
           </button>
          
@@ -138,6 +144,7 @@ function Cards({driversForCards}) {
     
   );
 }
+
 
 export default Cards;
 

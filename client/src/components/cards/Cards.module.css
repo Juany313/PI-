@@ -8,7 +8,7 @@
     height: 600px;
 }
 .list > * {
-    height: 100%; /* Garantiza que las celdas se expandan a la altura especificada */
+    height: 80%; /* Garantiza que las celdas se expandan a la altura especificada */
 }
 .cards_container_principal{
     /* background-color: pink; */
@@ -17,5 +17,5 @@
 }
 
 .cards_container_principal_but {
-    margin-bottom: 10em;
+    margin-bottom: 0.5em;
 }

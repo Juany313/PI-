@@ -1,18 +1,29 @@
-import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN,GET_VALOR_PAGE } from "../actions";
+import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN,
+    ADVANCE_PAGE, GO_BACK_PAGE, SET_CURRENT_PAGE } from "../actions";
 
 
-let initialState = {allDrivers:[], driversCopy: [], allTeams:[],valorPage: { start: 0,numero:1, end: 9 }}
+let initialState = {allDrivers:[], driversCopy: [], allTeams:[],currentPage: 1,}
 
 function rootReducer(state=initialState,action){
     switch (action.type) {
 
 
-        case GET_VALOR_PAGE:
+        case ADVANCE_PAGE:
             return {
                 ...state,
-                valorPage: action.payload,
-               
-              };
+                currentPage: state.currentPage + 1,
+            };
+        case GO_BACK_PAGE:
+            return {
+                ...state,
+                currentPage: state.currentPage - 1,
+            };
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload,
+            };
+
         case GET_DRIVERS:
             return {
                 ...state,

@@ -10,6 +10,26 @@ export const GET_VALOR_PAGE = "GET_VALOR_PAGE";
 export const POST_DRIVER = 'POST_DRIVER';
 
 
+// paginado
+export const ADVANCE_PAGE = 'ADVANCE_PAGE';
+export const GO_BACK_PAGE = 'GO_BACK_PAGE';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+
+export const advancePage = () => ({
+  type: ADVANCE_PAGE,
+});
+
+export const goBackPage = () => ({
+  type: GO_BACK_PAGE,
+});
+
+export const setCurrentPage = (page) => ({
+  type: SET_CURRENT_PAGE,
+  payload: page,
+});
+
+
+
 
 export function getDriversByOrigin(origin) {
     return async function (dispatch) {
