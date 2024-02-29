@@ -1,5 +1,5 @@
 import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN,
-    ADVANCE_PAGE, GO_BACK_PAGE, SET_CURRENT_PAGE } from "../actions";
+    ADVANCE_PAGE, GO_BACK_PAGE, SET_CURRENT_PAGE, RESET_PAGE } from "../actions";
 
 
 let initialState = {allDrivers:[], driversCopy: [], allTeams:[],currentPage: 1,}
@@ -7,6 +7,11 @@ let initialState = {allDrivers:[], driversCopy: [], allTeams:[],currentPage: 1,}
 function rootReducer(state=initialState,action){
     switch (action.type) {
 
+        case RESET_PAGE:
+            return {
+                ...state,
+                currentPage: 1, // Restablecer la página actual a 1
+            };
 
         case ADVANCE_PAGE:
             return {

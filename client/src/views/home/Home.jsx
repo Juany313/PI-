@@ -46,12 +46,12 @@ function Home() {
   }
 
   function handleSubmit(){
-    console.log("aca lo que hay en searchString",searchString);
+    //console.log("aca lo que hay en searchString",searchString);
     dispatch(getDriversByName(searchString))
     
   }
   function handleSubmitTeam(){
-    console.log("aca lo que hay en searchStringTeam",searchStringTeam);
+    //console.log("aca lo que hay en searchStringTeam",searchStringTeam);
     dispatch(getDriversByTeam(searchStringTeam))
     //console.log("acaDriverrsss", allDrivers);
   }
@@ -62,9 +62,17 @@ function Home() {
   
   
 
-  useEffect(()=>{
+ /*  useEffect(()=>{
     dispatch(getDrivers());
-  }, [dispatch]);
+  }, [dispatch]); */
+  
+  useEffect(() => {
+    // Verifica si la lista de conductores ya está cargada en el estado global de Redux
+    if (!allDrivers.length) {
+      // Si no está cargada, realiza la carga inicial
+      dispatch(getDrivers());
+    }
+  }, [dispatch, allDrivers]);
 
 
   return (

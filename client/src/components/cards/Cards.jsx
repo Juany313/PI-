@@ -5,7 +5,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 /* actions */
-import { advancePage, goBackPage, setCurrentPage } from '../../redux/actions';
+import { advancePage, goBackPage, setCurrentPage, resetPage } from '../../redux/actions';
 /* para usar con estas actions */
 const itemsPerPage = 9; // Número de objetos por página
 
@@ -30,15 +30,20 @@ function Cards({driversForCards}) {
   console.log("###########current PAGEEEE ACAA; ",currentPage);
   //!#####################################################################################
   //! TENGO QUE VER PORQUE ESTO ME DA UNDIFINED Y HACER CORRECCIONES!!
+  
+  // Calcula el índice de inicio y fin del array para la página actual
+  let startIndex = (currentPage - 1) * itemsPerPage;
+  let endIndex = startIndex + itemsPerPage;
+  
   console.log("###########current startIndex ACAA; ",startIndex);
   console.log("###########current endIndex ACAA; ",endIndex);
 
-  // Calcula el índice de inicio y fin del array para la página actual
-  var startIndex = (currentPage - 1) * itemsPerPage;
-  var endIndex = startIndex + itemsPerPage;
-  
-
   /* PAGINADO */
+  //! tengo que ver como hacer que funcione el reset, que recargue la pagina
+  const handleResetClick = () => {
+    console.log("resetttttttttt");
+    dispatch(resetPage()); // Despachar la acción para restablecer la página
+  };
   const nextPage = () => {
     dispatch(advancePage());
   };
@@ -57,7 +62,19 @@ function Cards({driversForCards}) {
   
     // Lógica de ordenación según el tipo de botón
     let sortedDrivers = [];
-  
+  //! esto quizas es mejor hacerlo en redux
+  //! MODIFICO LO QUE TENGA QUE MODIFICAR PARA QUE QUEDE LO MEJOR POSIBLE EL PROYECTO, QUE FUNCIONE COMO QUIERO
+  //! QUE ME HAGA SENTIR ORGULLOSOS DE LO QUE HICE
+  //? HAGO UNA LISTA DE LO QUE QUIERO MEJORAR, Y LO ESTRUCTURO EN PASOS
+  //! YA QUE ESTA ESTO ME SIRVE PARA MEJORAR MI MANERA DE ORGANIZARME Y SER MÁS AGIL
+
+  /* 
+    MAQUETACIÓN (puedo hacer una vista nueva para practicar eso y para practicar lo demas puedo hacer lo mismo 
+      entonces practico en la misma app y me aseguro de que funcione sin poner en riesgo lo otro y probando cosas nuevas!!)
+  */
+
+
+//! HACER ESTO EN REDUXXXXXXXXXXXXXXXXX
     if (buttonType === 'ascendente') {
       // Ordenar alfabéticamente ascendente
       sortedDrivers = [...driversForCards].sort((a, b) => a.name.localeCompare(b.name));
@@ -112,19 +129,13 @@ function Cards({driversForCards}) {
           >
             Fecha de Nacimiento
           </button>
-          <button
-            type="button"
-            className={activeButton === 'sinOrden' ? 'active' : 'noactive'}
-            onClick={() => handleButtonClick('sinOrden')}
-          >
+         
+          <button type="button" onClick={handleResetClick}>
             Reset
           </button>
           <button type="button" onClick={prevPage}>
             Prev
           </button>
-          {/* <button type="button" onClick={handlePrevClick}>
-          {valorPage.numero}
-          </button> */}
           <button type="button" onClick={nextPage}>
             Next
           </button>

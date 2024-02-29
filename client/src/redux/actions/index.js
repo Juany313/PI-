@@ -5,7 +5,6 @@ export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const GET_TEAMS = "GET_TEAMS";
 export const GET_DRIVERS_BY_TEAM = "GET_DRIVERS_BY_TEAM";
 export const GET_DRIVERS_BY_ORIGIN = "GET_DRIVERS_BY_ORIGIN";
-export const GET_VALOR_PAGE = "GET_VALOR_PAGE";
 
 export const POST_DRIVER = 'POST_DRIVER';
 
@@ -14,6 +13,12 @@ export const POST_DRIVER = 'POST_DRIVER';
 export const ADVANCE_PAGE = 'ADVANCE_PAGE';
 export const GO_BACK_PAGE = 'GO_BACK_PAGE';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const RESET_PAGE = 'RESET_PAGE';
+
+export const resetPage = () => ({
+  type: RESET_PAGE,
+});
+
 
 export const advancePage = () => ({
   type: ADVANCE_PAGE,
@@ -98,14 +103,6 @@ export function getTeams(){
         })
     }
 }
-export function getValorPage(valorPage){
-        return function(dispatch){
 
-            return dispatch({
-                type: GET_VALOR_PAGE,
-                payload: valorPage
-            })
-        }
-    }
 
 
