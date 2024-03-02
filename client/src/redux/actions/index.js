@@ -5,6 +5,7 @@ export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const GET_TEAMS = "GET_TEAMS";
 export const GET_DRIVERS_BY_TEAM = "GET_DRIVERS_BY_TEAM";
 export const GET_DRIVERS_BY_ORIGIN = "GET_DRIVERS_BY_ORIGIN";
+export const GET_DRIVERS_BY_ORDER = "GET_DRIVERS_BY_ORDER";
 
 export const POST_DRIVER = 'POST_DRIVER';
 
@@ -32,6 +33,12 @@ export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: page,
 });
+
+export const getDriversByOrder = (order) => ({
+  type: GET_DRIVERS_BY_ORDER,
+  payload: { order }, // Envía el orden dentro de un objeto
+});
+
 
 
 

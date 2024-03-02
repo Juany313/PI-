@@ -1,4 +1,4 @@
-import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN,
+import { GET_DRIVERS,GET_TEAMS,GET_DRIVERS_BY_NAME,GET_DRIVERS_BY_TEAM,GET_DRIVERS_BY_ORIGIN,GET_DRIVERS_BY_ORDER,
     ADVANCE_PAGE, GO_BACK_PAGE, SET_CURRENT_PAGE, RESET_PAGE } from "../actions";
 
 
@@ -52,7 +52,7 @@ function rootReducer(state=initialState,action){
                 allTeams: action.payload,
               };
         case GET_DRIVERS_BY_ORIGIN:
-            console.log("action.payload.drivers",action.payload.drivers[0].created);
+            console.log("action.payload.drivers",action.payload.drivers[0].created)
             
             switch (action.payload.origin) {
                 case "api":
@@ -73,6 +73,28 @@ function rootReducer(state=initialState,action){
                 default:
                     return {...state};
             }
+            case GET_DRIVERS_BY_ORDER:
+                switch (action.payload.order) {
+                    case "ascendente":
+                        console.log("se esta ejecutando estaaaaaaaaaaaaaa", action.payload.order);
+                        return {
+                            ...state,
+                            allDrivers: [...state.allDrivers].sort((a, b) => a.name.localeCompare(b.name)),
+                        };
+                    case "descendente":
+                        return {
+                            ...state,
+                            allDrivers: [...state.allDrivers].sort((a, b) => b.name.localeCompare(a.name)),
+                        };
+                    case "fechaNacimiento":
+                        return {
+                            ...state,
+                            allDrivers: [...state.allDrivers].sort((a, b) => new Date(a.dob) - new Date(b.dob)),
+                        };
+                    default:
+                        return state;
+                }
+            
 
     
         default:
