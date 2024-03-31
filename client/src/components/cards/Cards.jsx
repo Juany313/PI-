@@ -5,7 +5,7 @@ import {useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 /* actions */
-import { advancePage, goBackPage, setCurrentPage, resetPage,getDriversByOrder } from '../../redux/actions';
+import { advancePage, goBackPage, setCurrentPage, resetPage } from '../../redux/actions';
 /* para usar con estas actions */
 const itemsPerPage = 6; // Número de objetos por página
 
@@ -42,6 +42,10 @@ function Cards() {
 
 
   /* PAGINADO */
+  /* const totalPages = allDrivers.length;  no uso esto porque a partir de la pagina 86 ya no hay nada
+  */
+  const totalPages = 86;
+
   const handleResetClick = () => {
     console.log("resetttttttttt");
     dispatch(resetPage()); // Despachar la acción para restablecer la página
@@ -56,24 +60,44 @@ function Cards() {
       dispatch(goBackPage());
     }
   };
+  const finalPage = () => {
+    dispatch(setCurrentPage(totalPages));
+  };
+  
 
   //! Usar esta funcion, que aparezcan los numeros de páginasssssssssssss
   const goToPage = (page) => {
     dispatch(setCurrentPage(page));
   };
+ 
 
+  // Calcula el rango de botones de página a mostrar
+const maxButtonsToShow = 8;
+let startPage = currentPage - Math.floor(maxButtonsToShow / 2);
+let endPage = startPage + maxButtonsToShow - 1;
 
-  /* function handleSelectChange() {
-    var orden = document.getElementById("ordenSeleccionado").value;
-    handleButtonClick(orden);
-  }
-  const handleButtonClick = (order) => {
-    dispatch(getDriversByOrder(order))
-  } */
-  
-  
+// Ajusta el inicio y fin del rango si es necesario
+if (startPage < 1) {
+  startPage = 1;
+  endPage = Math.min(totalPages, maxButtonsToShow);
+} else if (endPage > totalPages) {
+  endPage = totalPages;
+  startPage = Math.max(1, endPage - maxButtonsToShow + 1);
+}
 
-  
+  const pageButtons = [];
+for (let i = startPage; i <= endPage; i++) {
+  const buttonStyle = i === currentPage ? { 
+    border: '2px solid #1a1a1a',
+    borderRadius: '20px',
+    backgroundColor: '#41e6e5',
+    color: '#1a1a1a'
+  } : null;
+  pageButtons.push(
+    <button key={i} type="button" onClick={() => goToPage(i)} style={buttonStyle}>{i}</button>
+  );
+}
+
 
 
   return (
@@ -90,20 +114,15 @@ function Cards() {
       </div>
       <div className={style.cards_container_principal_but}>
 
-          {/* <select className={style.ordenSeleccionado} id="ordenSeleccionado" onChange={handleSelectChange}>
-            <option value="orden">Orden</option>
-            <option value="ascendente">Ascendente</option>
-            <option value="descendente">Descendente</option>
-            <option value="fechaNacimiento">FDN</option>
-          </select> */}
-
-         
-
-          <button type="button" onClick={handleResetClick}>
-            Reset
-          </button>
           <button type="button" onClick={prevPage}>
             Prev
+          </button>
+          <button type="button" onClick={handleResetClick}>
+            ..
+          </button>
+          {pageButtons}
+          <button type="button" onClick={finalPage}>
+            ..
           </button>
           <button type="button" onClick={nextPage}>
             Next
