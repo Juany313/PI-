@@ -55,10 +55,43 @@ body {
 }
 .nav_container input {
     font-size: 1.5em;
-    width: 4em;
+    width: 6em;
 }
 
+.ordenSeleccionado {
+    font-size: 1.5em; /* Tamaño de fuente deseado */
+    width: auto; /* Ancho deseado */
+    text-align: center;
+    background-color: #1a1a1a;
+    color: #41e6e5;
+    cursor: pointer;
+    transition: all 0.9s ease;
+}
 
+.ordenSeleccionado:hover {
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
+}
+.origenSeleccionado {
+    font-size: 1.5em; /* Tamaño de fuente deseado */
+    width: auto; /* Ancho deseado */
+    text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: #1a1a1a;
+    color: #41e6e5;
+    cursor: pointer;
+    transition: all 0.9s ease;
+}
+
+.origenSeleccionado:hover {
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
+}
 
 
 

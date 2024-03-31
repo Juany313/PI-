@@ -19,16 +19,12 @@ export const RESET_PAGE = 'RESET_PAGE';
 export const resetPage = () => ({
   type: RESET_PAGE,
 });
-
-
 export const advancePage = () => ({
   type: ADVANCE_PAGE,
 });
-
 export const goBackPage = () => ({
   type: GO_BACK_PAGE,
 });
-
 export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: page,
@@ -44,6 +40,7 @@ export const getDriversByOrder = (order) => ({
 
 
 export function getDriversByOrigin(origin) {
+  console.log("origin en actionsssssss", origin);
     return async function (dispatch) {
       try {
         const response = await axios("http://localhost:3001/drivers");
@@ -66,6 +63,7 @@ export function getDrivers(){
         })
     }
 }
+
 export function getDriversByName(name){
     return async function(dispatch){
         const response = await axios(`http://localhost:3001/drivers?name=${name}`)

@@ -12,7 +12,6 @@ function rootReducer(state=initialState,action){
                 ...state,
                 currentPage: 1, // Restablecer la página actual a 1
             };
-
         case ADVANCE_PAGE:
             return {
                 ...state,
@@ -52,51 +51,60 @@ function rootReducer(state=initialState,action){
                 allTeams: action.payload,
               };
         case GET_DRIVERS_BY_ORIGIN:
-            console.log("action.payload.drivers",action.payload.drivers[0].created)
-            
             switch (action.payload.origin) {
                 case "api":
                     return {
                         ...state,
+                        currentPage: 1, // Restablecer la página actual a 1
                         allDrivers: action.payload.drivers.filter(driver => driver.created === false),
                       };
                 case "bdd":
                     return {
                         ...state,
+                        currentPage: 1, // Restablecer la página actual a 1
                         allDrivers: action.payload.drivers.filter(driver => driver.created === true),
                       };
                 case "all":
                     return {
                         ...state,
+                        currentPage: 1, // Restablecer la página actual a 1
                         allDrivers: action.payload.drivers,
                       };
                 default:
                     return {...state};
             }
-            case GET_DRIVERS_BY_ORDER:
+        case GET_DRIVERS_BY_ORDER:
+            console.log("se esta ejecutando aaaa", action.payload.order);
                 switch (action.payload.order) {
+                    case "orden":
+                        return {
+                            ...state,
+                            allDrivers: [...state.driversCopy],
+                            currentPage: 1 // Restablecer la página actual a 1
+                        };
                     case "ascendente":
                         console.log("se esta ejecutando estaaaaaaaaaaaaaa", action.payload.order);
                         return {
                             ...state,
                             allDrivers: [...state.allDrivers].sort((a, b) => a.name.localeCompare(b.name)),
+                            currentPage: 1 // Restablecer la página actual a 1
                         };
                     case "descendente":
                         return {
                             ...state,
                             allDrivers: [...state.allDrivers].sort((a, b) => b.name.localeCompare(a.name)),
+                            currentPage: 1 // Restablecer la página actual a 1
                         };
                     case "fechaNacimiento":
                         return {
                             ...state,
                             allDrivers: [...state.allDrivers].sort((a, b) => new Date(a.dob) - new Date(b.dob)),
+                            currentPage: 1 // Restablecer la página actual a 1
                         };
                     default:
                         return state;
                 }
             
-
-    
         default:
             return {...state};
     }

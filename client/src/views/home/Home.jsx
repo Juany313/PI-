@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom"
 
 /* actions */
-import {getDrivers, getDriversByName,getDriversByTeam,getDriversByOrigin} from "../../redux/actions"
+import {getDrivers, getDriversByName,getDriversByTeam,getDriversByOrigin,getDriversByOrder} from "../../redux/actions"
  
 
 
@@ -21,7 +21,6 @@ function Home() {
   const dispatch = useDispatch();
   /* Estado global */
   const allDrivers = useSelector((state)=> state.allDrivers);
-  
   
   /* Estado local */
   const [searchString, setSearchString] = useState("");
@@ -50,22 +49,38 @@ function Home() {
     dispatch(getDriversByName(searchString))
     
   }
+
   function handleSubmitTeam(){
     //console.log("aca lo que hay en searchStringTeam",searchStringTeam);
     dispatch(getDriversByTeam(searchStringTeam))
     //console.log("acaDriverrsss", allDrivers);
   }
+  
+
+  function handleSelectChangeOrigin() {
+    var origin = document.getElementById("origenSeleccionado").value;
+    console.log("acaestael origennnn", origin);
+    handleSubmitOrigin(origin);
+  }
+
+
+
   function handleSubmitOrigin(origin){
     // Despachar la acción con el argumento 
     dispatch(getDriversByOrigin(origin));
   }
   
+  //Aca funciones de los ordenamientossssssssssss
+  function handleSelectChange() {
+    var orden = document.getElementById("ordenSeleccionado").value;
+    handleButtonClick(orden);
+  }
+  const handleButtonClick = (order) => {
+    dispatch(getDriversByOrder(order))
+  }
   
 
- /*  useEffect(()=>{
-    dispatch(getDrivers());
-  }, [dispatch]); */
-  
+  //Primera renderizacion
   useEffect(() => {
     // Verifica si la lista de conductores ya está cargada en el estado global de Redux
     if (!allDrivers.length) {
@@ -91,9 +106,23 @@ function Home() {
               <input className={style.buscar_team} type="search" value={searchStringTeam} onChange={handleChangeTeam} />
                 <button onClick={handleSubmitTeam}>Buscar Team</button>
             
-            <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
-            <button onClick={() => handleSubmitOrigin("bdd")}>Obtener origen BDD</button>
-            <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button>
+          {/*   <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
+            <button onClick={() => handleSubmitOrigin("api")}>Obtener origen BDD</button>
+            <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button> */}
+
+            <select className={style.origenSeleccionado} id="origenSeleccionado" onChange={handleSelectChangeOrigin}>
+            <option value="all">Origen</option>
+            <option value="api">Obtener origen API</option>
+            <option value="bdd">Obtener origen BDD</option>
+            <option value="all">Obtener TODOS</option>
+            </select>
+
+            <select className={style.ordenSeleccionado} id="ordenSeleccionado" onChange={handleSelectChange}>
+            <option value="orden">Orden</option>
+            <option value="ascendente">Ascendente</option>
+            <option value="descendente">Descendente</option>
+            <option value="fechaNacimiento">FDN</option>
+            </select>
           </div>
       </div>
       

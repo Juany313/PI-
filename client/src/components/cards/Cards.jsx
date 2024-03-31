@@ -7,31 +7,32 @@ import {useDispatch, useSelector} from "react-redux";
 /* actions */
 import { advancePage, goBackPage, setCurrentPage, resetPage,getDriversByOrder } from '../../redux/actions';
 /* para usar con estas actions */
-const itemsPerPage = 9; // Número de objetos por página
+const itemsPerPage = 6; // Número de objetos por página
 
 /* components */
 import Card from "../card/Card"
 
 import {Link} from "react-router-dom";
 
+
+
 function Cards() {
   //Cuando me llega una sola props hago el destructuring directo.
   //Cuando me llegan muchas props hago el destructuring dentro de la funcion, queda mas ordenado.
 
   /* ESTADOS LOCALES */
-  
   const [driversForCard, setDriversForCard] = useState([])
  
 
   /* ESTADO GLOBAL */
   const allDrivers = useSelector((state)=> state.allDrivers);
-  console.log("aca alldriverssssss", allDrivers);
   const currentPage = useSelector((state) => state.currentPage);
   const dispatch = useDispatch();
   
   
   useEffect(() => {
     // Esta función se ejecutará cada vez que currentPage o allDrivers cambien
+    
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const driversForCardRecorte = allDrivers.slice(startIndex, endIndex);
@@ -50,19 +51,25 @@ function Cards() {
   };
 
   const prevPage = () => {
-    dispatch(goBackPage());
+    if(currentPage>1){
+
+      dispatch(goBackPage());
+    }
   };
 
+  //! Usar esta funcion, que aparezcan los numeros de páginasssssssssssss
   const goToPage = (page) => {
     dispatch(setCurrentPage(page));
   };
 
 
-      const handleButtonClick = (order) => {
-        console.log("ordeeerrrr", order);
-        dispatch(getDriversByOrder(order))
-        
-      }
+  /* function handleSelectChange() {
+    var orden = document.getElementById("ordenSeleccionado").value;
+    handleButtonClick(orden);
+  }
+  const handleButtonClick = (order) => {
+    dispatch(getDriversByOrder(order))
+  } */
   
   
 
@@ -71,27 +78,27 @@ function Cards() {
 
   return (
     <div className={style.cards_container_principal}>
+      <div className={style.list}>
+
+      {(Array.isArray(driversForCard)) && driversForCard.map((driver)=>{
+        return (
+          <Link key={driver.id} to={`/detail/${driver.id}`}>
+            <Card key={driver.id} driver={driver}/>
+          </Link>
+        )
+      })}
+      </div>
       <div className={style.cards_container_principal_but}>
-          <button 
-            type="button"
-            
-            onClick={() => handleButtonClick('ascendente')}
-          >
-            Ascendente
-          </button>
-          <button
-            type="button"
-            onClick={() => handleButtonClick('descendente')}
-          >
-            Descendente
-          </button>
-          <button
-            type="button"
-            onClick={() => handleButtonClick('fechaNacimiento')}
-          >
-            Fecha de Nacimiento
-          </button>
+
+          {/* <select className={style.ordenSeleccionado} id="ordenSeleccionado" onChange={handleSelectChange}>
+            <option value="orden">Orden</option>
+            <option value="ascendente">Ascendente</option>
+            <option value="descendente">Descendente</option>
+            <option value="fechaNacimiento">FDN</option>
+          </select> */}
+
          
+
           <button type="button" onClick={handleResetClick}>
             Reset
           </button>
@@ -103,16 +110,6 @@ function Cards() {
           </button>
          
       </div> 
-      <div className={style.list}>
-
-      {(Array.isArray(driversForCard)) && driversForCard.map((driver)=>{
-        return (
-          <Link key={driver.id} to={`/detail/${driver.id}`}>
-            <Card key={driver.id} driver={driver}/>
-          </Link>
-        )
-      })}
-      </div>
     </div>
     
   );

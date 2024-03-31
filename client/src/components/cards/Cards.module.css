@@ -1,21 +1,53 @@
 .list {
-    width: 90vw;
-    height: 100%;
-    margin: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 120px 60px; /* Separación vertical de 20px, separación horizontal de 30px */
-    height: 600px;
+    /* background-color: aqua; */
+    margin-left: 10px;
+    margin-right: 45px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 900px;
+    overflow: hidden;
 }
-.list > * {
-    height: 80%; /* Garantiza que las celdas se expandan a la altura especificada */
+
+@media only screen and (max-width: 768px) {
+    /* Aplica estos estilos solo en dispositivos con un ancho máximo de 768px, como celulares */
+    .list {
+        overflow-y: auto; /* Activa el desplazamiento vertical solo en dispositivos móviles */
+    }
 }
+
 .cards_container_principal{
     /* background-color: pink; */
-    height: 100vh;
-   
+    height: 85vh;
+    position: relative;
+    
 }
 
 .cards_container_principal_but {
-    margin-bottom: 0.5em;
+    /* background-color: blue; */
+    position: absolute;
+    bottom: 0; /* Ajusta esta cantidad según tus necesidades */
+    left: 0;
+    right: 0;
+    margin: auto;
+
+}
+
+.ordenSeleccionado {
+    font-size: 1.5em; /* Tamaño de fuente deseado */
+    width: auto; /* Ancho deseado */
+    text-align: center;
+    background-color: #1a1a1a;
+    color: #41e6e5;
+    cursor: pointer;
+    transition: all 0.9s ease;
+}
+
+.ordenSeleccionado:hover {
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    background-color: #41e6e5;
+    color: #1a1a1a;
 }
