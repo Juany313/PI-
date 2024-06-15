@@ -12,7 +12,7 @@
 
 .card_container{
   width: 20vw;
-  min-width: 400px;
+  min-width: 300px;
   height: 25vh;
   min-height: 230px;
  
@@ -58,7 +58,7 @@
   .texto_container{
   
     color: yellow;
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: left;
     margin-left: 1em;
     width: 50%;
@@ -74,6 +74,7 @@
   }
   .texto_container_teams{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
   }
   .texto_container_teams span{

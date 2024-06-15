@@ -68,15 +68,17 @@ function Home() {
   function handleSubmitOrigin(origin){
     // Despachar la acción con el argumento 
     dispatch(getDriversByOrigin(origin));
+    let orden = document.getElementById("ordenSeleccionado");
+    orden.value = "orden";
   }
   
   //Aca funciones de los ordenamientossssssssssss
   function handleSelectChange() {
-    var orden = document.getElementById("ordenSeleccionado").value;
+    let orden = document.getElementById("ordenSeleccionado").value;
     handleButtonClick(orden);
   }
   const handleButtonClick = (order) => {
-    dispatch(getDriversByOrder(order))
+    dispatch(getDriversByOrder(order));
   }
   
 
@@ -106,9 +108,6 @@ function Home() {
               <input className={style.buscar_team} type="search" value={searchStringTeam} onChange={handleChangeTeam} />
                 <button onClick={handleSubmitTeam}>Buscar Team</button>
             
-          {/*   <button onClick={() => handleSubmitOrigin("api")}>Obtener origen API</button>
-            <button onClick={() => handleSubmitOrigin("api")}>Obtener origen BDD</button>
-            <button onClick={() => handleSubmitOrigin("all")}>Obtener TODOS</button> */}
 
             <select className={style.origenSeleccionado} id="origenSeleccionado" onChange={handleSelectChangeOrigin}>
             <option value="all">Origen</option>

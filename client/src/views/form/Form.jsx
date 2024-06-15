@@ -102,13 +102,13 @@ import validate from "../../utils"
 
     return (
       <div className={style.container_principal}>
-        <div className={style.container}>
-
               <div className={style.container_butonn}>
                 <Link  to={`/home`}>
                   <button >HOME</button>
                 </Link>
               </div>
+        <div className={style.container}>
+
             
               <form className={style.container_form} onSubmit={handleSubmit}>
               <div> 

@@ -79,7 +79,7 @@ function rootReducer(state=initialState,action){
                     case "orden":
                         return {
                             ...state,
-                            allDrivers: [...state.driversCopy],
+                            /* allDrivers: [...state.driversCopy], */
                             currentPage: 1 // Restablecer la página actual a 1
                         };
                     case "ascendente":

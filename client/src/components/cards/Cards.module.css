@@ -7,7 +7,7 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    height: 900px;
+    height: 86vh;
     overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
 
 .cards_container_principal{
     /* background-color: pink; */
-    height: 85vh;
+    height: 92vh;
     position: relative;
     
 }
