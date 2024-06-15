@@ -111,9 +111,9 @@ function Home() {
 
             <select className={style.origenSeleccionado} id="origenSeleccionado" onChange={handleSelectChangeOrigin}>
             <option value="all">Origen</option>
-            <option value="api">Obtener origen API</option>
-            <option value="bdd">Obtener origen BDD</option>
-            <option value="all">Obtener TODOS</option>
+            <option value="api">Origen API</option>
+            <option value="bdd">Origen BDD</option>
+            <option value="all">TODOS</option>
             </select>
 
             <select className={style.ordenSeleccionado} id="ordenSeleccionado" onChange={handleSelectChange}>

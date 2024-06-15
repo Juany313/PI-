@@ -1,10 +1,13 @@
 
+/* Falta dar a todos los botones el mismo tamaño , mejorar la navBar, revisar formulario de crear driver */
+
 .nav_container{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     /* background-color: #0ccac4; */
-    width: 100vw;
-    height: 5vh;
+    width: 30vw;
+    height: 50vh;
 }
 .nav_container_navbar{
     width: 70%;
@@ -16,9 +19,9 @@
     padding: 20px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
-    flex-direction: column;
-    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     width: 100vw;
     height: 100vh;

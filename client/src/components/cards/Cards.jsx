@@ -9,7 +9,7 @@ import Paginate from '../paginate/Paginate';
 
 import style from './Cards.module.css';
 
-const itemsPerPage = 6;
+const itemsPerPage = 9;
 
 function Cards() {
   const [driversForCard, setDriversForCard] = useState([]);
